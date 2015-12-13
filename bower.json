@@ -1,0 +1,30 @@
+{
+  "name": "Materialism",
+  "version": "1.1.2",
+  "authors": [
+    "Theme Guys"
+  ],
+  "license": "Envato REGULAR LICENSE",
+  "homepage": "http://themeforest.net/item/materialism-angular-bootstrap-admin-template/11322821",
+  "private": true,
+  "keywords": [
+    "AngularJS",
+    "Bootstrap",
+    "Admin",
+    "Dashboard",
+    "Panel",
+    "App",
+    "Charts",
+    "Responsive"
+  ],
+
+  "dependencies": {
+    "animate-scss":"1.2.1",
+    "bootstrap-additions":"0.2.3",
+    "bootstrap-css-only":"3.3.4",
+    "bootstrap-sass":"3.3.4",
+    "font-awesome":"4.3.0",
+    "roboto-fontface":"0.4.0"
+  }
+
+}

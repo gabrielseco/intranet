@@ -1,0 +1,20 @@
+@charset 'utf-8';
+
+.breadcrumb>li+li:before {
+  content:"/"
+}
+
+.forms-advanced {
+  margin: 40px;
+}
+
+
+.main-container .main-content {
+    position: relative;
+    padding-top: 64px;
+    margin-left: 260px;
+}
+
+.form-group img {
+    margin-top: 10px;
+}
