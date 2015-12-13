@@ -11,7 +11,7 @@ import config from '../../config/config'
 var titulo = 'Noticia';
 
 var info = {
-    TITULO : 'Noticia',
+    TITULO : titulo,
     ICON: 'md-add-circle',
     TEXTO: 'Desde este formulario puedes crear noticias'
 }

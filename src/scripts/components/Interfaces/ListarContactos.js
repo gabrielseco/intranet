@@ -7,6 +7,8 @@ import MainContainer from '../Containers/MainContainer';
 import UIDataTable from '../UI/Datatable';
 import UIButton from '../UI/Button';
 import UIInput from '../UI/Input';
+import UIModal from '../UI/Modal'
+
 
 
 //flux
@@ -14,11 +16,15 @@ import AppActions from '../../actions/app-actions';
 
 //config tiene el menú y la configuración del usuario
 import config from '../../config/config'
-var titulo = 'Contactos'
-var texto = 'Listado de contactos'
+
+var plural = 'Contactos';
+
+var singular = 'Contacto';
+
+var texto = 'Listado de contactos';
 
 var info = {
-    TITULO : titulo,
+    TITULO : plural,
     ICON: 'md md-list',
     TEXTO: texto
 }
@@ -29,12 +35,18 @@ var breadcrumb = [
     LINK:'http://www.ggseco.com'
   },
   {
-    NAME: titulo
+    NAME: plural
   },
   {
     NAME: texto
   }
 ]
+
+
+var infoModal = {
+  COMPONENT:singular,
+  NAME: ''
+}
 
 
 var tabla = {
@@ -61,65 +73,83 @@ var tabla = {
   ]
 };
 
-function getKeys(json){
-  var keys = [];
-  Object.keys(json[0]).map((key, i) => {
-    var newKey = key.charAt(0).toUpperCase() + key.substring(1, key.length);
-    keys.push(key);
-  });
-  return keys;
-}
 
-function mapToTable(json, headers){
-
-  var borrar = {
-    CLASS:'btn btn-danger',
-    NAME:'Eliminar',
-    refComponent: 'eliminar'
-  }
+function mapToTable(json, headers, modal){
 
 
   var body = [];
 
+
   for(var i = 0; i < json.length; i++){
     var fecha = moment(json[i]["alta"]).format("DD/MM/YYYY")
-    var ver = {
+
+    var borrar = {
+      CLASS:'btn btn-danger',
+      NAME:'Eliminar',
+      refComponent: 'eliminar',
+      ACTION: modal,
+      STORE: 'idContacto'
+    }
+
+    var editar = {
       CLASS:'btn btn-primary',
       NAME:'Ver',
       refComponent: 'ver',
-      LINK:'ver_contacto'
+      LINK:'ver_contacto',
     }
 
-    ver.ID = json[i]["id"];
+    editar.ID = json[i]["id"];
+    borrar.ID = json[i];
+
+    borrar.ACTIONS = AppActions
+
     var obj = {
       fecha: fecha,
-      nombre: json[i]["nombre"],
-      ver: <UIButton data={ver}/>,
-      eliminar: <UIButton data={borrar}/>
+      usuario: json[i]["nombre"],
+      editar: <UIButton data={editar}/>,
+      eliminar: <UIButton data={borrar} />
     }
 
     body.push(obj)
   }
+
 
   tabla.BODY = body;
 
 
 }
 
-
 class ListarContactos extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {tabla:''}
+    this.state = {tabla:'', modalLoading: ''}
 
   }
   componentDidMount(){
     var headers = tabla.HEADERS;
     AppActions.receiveContacts((res) => {
-      console.log(res)
-      var tabla = mapToTable(res, headers)
+      var tabla = mapToTable(res, headers, this.setModal.bind(this))
       this.setState({tabla: tabla})
+    });
+
+  }
+  setModal(){
+    this.setState({
+      modalLoading: true
+    })
+    var info = AppActions.getPropertyFromStore('idContacto');
+    infoModal.NAME = info.nombre;
+  }
+  remove(){
+    console.log('remove')
+    var id = 0;
+    info = AppActions.getPropertyFromStore('idContacto');
+
+    id = info.id;
+
+    AppActions.deleteContact(id, (res) => {
+      location.reload()
     });
 
   }
@@ -138,6 +168,7 @@ class ListarContactos extends React.Component {
               <UIDataTable data={tabla}/>
             </section>
           </div>
+          <UIModal {...this.props} data={infoModal} remove={this.remove} loading={this.state.modalLoading}/>
         </div>
         {this.props.children}
       </div>

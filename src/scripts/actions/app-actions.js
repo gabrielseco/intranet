@@ -29,6 +29,15 @@ export default {
        cb (response.data);
      })
   },
+  deleteContact(id, cb){
+    dispatch({
+      actionType: AppConstants.DELETE_CONTACT
+    });
+    axios.delete('http://localhost:1337/contactos/'+id)
+         .then(function(response){
+           cb(response.data);
+         })
+  },
   receiveUsers(cb){
     dispatch({
       actionType: AppConstants.RECEIVE_USERS
@@ -62,6 +71,15 @@ export default {
     });
 
     axios.post('http://localhost:1337/user/'+id, obj)
+         .then(function(response){
+           cb(response.data);
+         })
+  },
+  deleteUser(id, cb){
+    dispatch({
+      actionType: AppConstants.DELETE_USER
+    });
+    axios.delete('http://localhost:1337/user/'+id)
          .then(function(response){
            cb(response.data);
          })

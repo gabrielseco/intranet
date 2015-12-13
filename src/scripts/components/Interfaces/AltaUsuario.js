@@ -11,15 +11,30 @@ import AppActions from '../../actions/app-actions';
 //config tiene el menú y la configuración del usuario
 import config from '../../config/config'
 
+var titulo = 'Usuarios';
+var texto  = 'Alta de usuario'
+
+
 var info = {
-    TITULO : 'Usuarios',
+    TITULO : titulo,
     ICON: 'md-add-circle',
     TEXTO: 'Desde este formulario puedes crear usuarios nuevos'
 }
-
+var breadcrumb = [
+  {
+    NAME: 'GGSECO.COM',
+    LINK:'http://www.ggseco.com'
+  },
+  {
+    NAME: titulo
+  },
+  {
+    NAME: texto
+  }
+]
 var form =
   {
-    TITULO:'Alta de usuario',
+    TITULO:texto,
     ELEMENTS:[
       {
         ID:'activo',
@@ -74,18 +89,7 @@ var form =
   }
 
 
-var breadcrumb = [
-  {
-    NAME: 'GGSECO.COM',
-    LINK:'http://www.ggseco.com'
-  },
-  {
-    NAME: 'Usuarios'
-  },
-  {
-    NAME: 'Alta de usuario'
-  }
-]
+
 
 
 

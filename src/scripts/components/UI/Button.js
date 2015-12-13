@@ -8,8 +8,8 @@ class UIButton extends React.Component {
       location.href='#/'+this.props.data.LINK+"/"+this.props.data.ID;
     } else if(this.props.data.refComponent === 'eliminar'){
         console.log('ID ELIMINAR'+this.props.data.ID)
-        this.props.data.ACTIONS.setPropertyForStore('idUser', this.props.data.ID)
-        $("#exampleModal").modal('show')
+        this.props.data.ACTIONS.setPropertyForStore(this.props.data.STORE, this.props.data.ID)
+        this.props.data.ACTION()
     }
   }
   render(){
@@ -24,7 +24,7 @@ class UIButton extends React.Component {
     }
     if(this.props.data.refComponent === 'eliminar'){
       return (
-        <button ref='modal' type="button" className="btn btn-primary"
+        <button ref='modal' type="button" className={this.props.data.CLASS}
                  bs-modal="modal"
                  data-toggle="dropdown"
                  onClick={this.click.bind(this)}> {this.props.data.NAME}

@@ -16,23 +16,43 @@ import AppActions from '../../actions/app-actions';
 //config tiene el menú y la configuración del usuario
 import config from '../../config/config'
 
+var plural = 'Usuarios';
+
+var singular = 'Usuario';
+
+var texto = 'Listado de usuarios';
+
 var info = {
-    TITULO : 'Usuarios',
+    TITULO : plural,
     ICON: 'md md-list',
-    TEXTO: 'Listado de usuarios'
+    TEXTO: texto
 }
 
 var breadcrumb = [
   {
-    NAME: 'GGSECO.COM'
+    NAME: 'GGSECO.COM',
+    LINK:'http://www.ggseco.com'
   },
   {
-    NAME: 'Usuarios'
+    NAME: plural
   },
   {
-    NAME: 'Listado de usuarios'
+    NAME: texto
   }
 ]
+
+var button = {
+  TYPE:'ROUND',
+  NAME:'',
+  CLASS:'btn btn-lg btn-round btn-success',
+  ICON: 'md md-add',
+  LINK: 'anade_usuario'
+}
+
+var infoModal = {
+  COMPONENT:singular,
+  NAME: ''
+}
 
 
 var tabla = {
@@ -58,20 +78,12 @@ var tabla = {
   ]
 };
 
-var button = {
-  TYPE:'ROUND',
-  NAME:'',
-  CLASS:'btn btn-lg btn-round btn-success',
-  ICON: 'md md-add',
-  LINK: 'anade_usuario'
-}
-
-var infoModal = {
-  NAME:'Usuario',
-}
 
 
-function mapToTable(json, headers, remove){
+
+
+
+function mapToTable(json, headers, modal){
 
 
   var body = [];
@@ -84,7 +96,8 @@ function mapToTable(json, headers, remove){
       CLASS:'btn btn-danger',
       NAME:'Eliminar',
       refComponent: 'eliminar',
-      ACTION: 'Usuario'
+      ACTION: modal,
+      STORE: 'idUser'
     }
 
     var editar = {
@@ -121,22 +134,34 @@ class ListarUsuarios extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {tabla: ''}
+    this.state = {tabla: '', modalLoading: false}
   }
   componentDidMount(){
     var headers = tabla.HEADERS;
     AppActions.receiveUsers((res) => {
-      var tabla = mapToTable(res, headers, this.remove)
+      var tabla = mapToTable(res, headers, this.setModal.bind(this))
       this.setState({tabla: tabla})
     });
+
+  }
+  setModal(){
+    this.setState({
+      modalLoading: true
+    })
+    var info = AppActions.getPropertyFromStore('idUser');
+    infoModal.NAME = info.usuario;
   }
   remove(){
     console.log('remove')
     var id = 0;
-    id = AppActions.getPropertyFromStore('idUser');
-    /*AppActions.editUser(id,obj, (res) => {
-      this.props.history.pushState(null, "/");
-    })*/
+    info = AppActions.getPropertyFromStore('idUser');
+
+    id = info.id;
+
+    AppActions.deleteUser(id, (res) => {
+      location.reload()
+    });
+
   }
   render() {
     if(this.state.tabla !== ''){
@@ -154,7 +179,7 @@ class ListarUsuarios extends React.Component {
               <UIDataTable data={tabla}/>
             </section>
           </div>
-          <UIModal data={infoModal} remove={this.remove}/>
+          <UIModal {...this.props} data={infoModal} remove={this.remove} loading={this.state.modalLoading}/>
         </div>
         {this.props.children}
       </div>
@@ -164,6 +189,7 @@ class ListarUsuarios extends React.Component {
   }
   }
 }
+
 
 
 export default ListarUsuarios
