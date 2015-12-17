@@ -83,5 +83,28 @@ export default {
          .then(function(response){
            cb(response.data);
          })
-  }
+  },
+  addSlide(obj,cb) {
+    dispatch({
+      actionType: AppConstants.ADD_SLIDE
+    })
+    axios.post('http://localhost:1337/slide',obj)
+         .then(function(response){
+           cb(response.data)
+         })
+  },
+  uploadSlide(id, imagen, cb) {
+    dispatch({
+      actionType: AppConstants.UPLOAD_SLIDE
+    })
+    console.log('imagen act',imagen)
+    var obj = {
+      id: id,
+      imagen: imagen
+    }
+    axios.post('http://localhost:1337/slide/uploadImagen/',obj)
+         .then(function(response){
+           cb(response.data)
+         })
+  },
 }

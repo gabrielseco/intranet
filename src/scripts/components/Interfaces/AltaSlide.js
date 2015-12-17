@@ -5,6 +5,9 @@ import UIPageHeader from '../UI/PageHeader';
 import MainContainer from '../Containers/MainContainer';
 import Form from '../Containers/Form';
 
+//flux
+import AppActions from '../../actions/app-actions';
+
 //config tiene el menú y la configuración del usuario
 import config from '../../config/config'
 
@@ -55,7 +58,7 @@ var form =
         NAME:'Enlace',
         TYPE:'text',
         CLASS:'form-control',
-        VALUE: ''
+        VALUE: 'http://www.'
       },
       {
         ID:'texto',
@@ -65,7 +68,7 @@ var form =
         VALUE: ''
       },
       {
-        ID: 'subida',
+        ID: 'imagen',
         NAME: 'Subir imagen',
         TYPE: 'file',
         CLASS: 'btn btn-info fileinput-button'
@@ -96,6 +99,17 @@ class AltaSlide extends React.Component {
   constructor(props) {
     super(props);
   }
+  makeUpload(id, imagen){
+    AppActions.uploadSlide(id, imagen, (res) => {
+      console.log('subida la imagen',res)
+    })
+  }
+  makeAction(obj, imagen){
+    AppActions.addSlide(obj, (res) => {
+      console.log('creado el slide',res)
+      this.props.makeUpload(res.id, imagen)
+    })
+  }
 
   render() {
 
@@ -107,7 +121,7 @@ class AltaSlide extends React.Component {
           <div className="main-content" autoscroll="true" bs-affix-target="" init-ripples="">
             <section className='forms-advanced'>
               <UIPageHeader info={info}/>
-              <Form form={form}/>
+              <Form {...this.props} form={form} makeAction={this.makeAction} makeUpload={this.makeUpload}/>
             </section>
           </div>
         </div>

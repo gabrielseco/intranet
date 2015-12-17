@@ -17,14 +17,21 @@ class Form extends React.Component {
 
   handleSubmit(e){
     e.preventDefault();
+    var imagen = null;
     var obj = new Object();
 
     for(var i = 0; i < this.props.form.ELEMENTS.length; i++) {
 
       var key = this.props.form.ELEMENTS[i].ID;
 
-      var value = document.getElementById(key).value;
       var type  = this.props.form.ELEMENTS[i].TYPE;
+      var value = "";
+
+      if(type === 'note'){
+        value = $("#"+key).code();
+      } else {
+        value = document.getElementById(key).value;
+     }
 
       if(value === 'on' && type === 'switch'){
         value = true
@@ -32,10 +39,16 @@ class Form extends React.Component {
         value = false
       }
 
+      if(type === 'file'){
+        imagen = AppActions.getPropertyFromStore('imagen');
+        console.log('imagen', imagen);
+      }
+
       obj[key] = value;
     }
+    console.log('obj',obj)
 
-    this.props.makeAction.bind(this)(obj)
+    this.props.makeAction.bind(this)(obj, imagen);
 
 
   }
@@ -50,7 +63,7 @@ class Form extends React.Component {
       <div className='row m-b-40'>
         <div className='col-md-12'>
           <div className='well white'>
-            <form ref='myForm' className='form-floating placeholder-form' onSubmit={this.handleSubmit.bind(this)}>
+            <form ref='myForm' encType="multipart/form-data" className='form-floating placeholder-form' onSubmit={this.handleSubmit.bind(this)}>
               <fieldset>
                 <legend>{this.props.form.TITULO}</legend>
                 {elements}

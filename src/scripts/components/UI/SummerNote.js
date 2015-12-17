@@ -17,7 +17,7 @@ class UISummerNote extends React.Component {
   render(){
 
     return (
-        <div ref='note' className={this.props.data.CLASS}></div>
+        <div id={this.props.data.ID} ref='note' className={this.props.data.CLASS}></div>
 
     )
 
