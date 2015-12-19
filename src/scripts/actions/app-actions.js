@@ -69,6 +69,7 @@ export default {
     dispatch({
       actionType: AppConstants.EDIT_USER
     });
+    console.log('obj ',obj)
 
     axios.post('http://localhost:1337/user/'+id, obj)
          .then(function(response){
@@ -93,15 +94,15 @@ export default {
            cb(response.data)
          })
   },
-  uploadSlide(id, imagen, cb) {
+  uploadSlide(id, cb) {
     dispatch({
       actionType: AppConstants.UPLOAD_SLIDE
     })
-    console.log('imagen act',imagen)
+    var imagen = this.getPropertyFromStore('imagen');
     var data = new FormData();
-         data.append('id', +id);
-         data.append('file', imagen);
-         
+        data.append('id', +id);
+        data.append('file', imagen);
+
     axios.post('http://localhost:1337/slide/uploadImagen/',data)
          .then(function(response){
            cb(response.data)

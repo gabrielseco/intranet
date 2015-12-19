@@ -46,6 +46,10 @@ var tabla = {
       SORT: true
     },
     {
+      NAME: 'Activo',
+      SORT: true
+    },
+    {
       NAME:'Imagen',
       SORT: false
     },
@@ -114,6 +118,7 @@ function mapToTable(json, headers, modal){
     }
     var obj = {
       fecha: fecha,
+      activo: json[i]["activo"] ? "Sí" : "No",
       imagen: <UIImagen data={imagen}/>,
       titulo: json[i]["titulo"],
       editar: <UIButton data={editar}/>,

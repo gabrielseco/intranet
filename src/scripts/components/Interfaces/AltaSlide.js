@@ -100,7 +100,7 @@ class AltaSlide extends React.Component {
     super(props);
   }
   makeUpload(id, imagen){
-    AppActions.uploadSlide(id, imagen, (res) => {
+    AppActions.uploadSlide(id, (res) => {
       console.log('subida la imagen',res)
       this.props.history.pushState(null, "/listar_slide");
     })
@@ -108,7 +108,7 @@ class AltaSlide extends React.Component {
   makeAction(obj, imagen){
     AppActions.addSlide(obj, (res) => {
       console.log('creado el slide',res)
-      this.props.makeUpload.bind(this)(res.id, imagen)
+      this.props.makeUpload.bind(this)(res.id)
     })
   }
 

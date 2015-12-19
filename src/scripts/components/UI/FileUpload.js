@@ -6,8 +6,6 @@ import AppActions from '../../actions/app-actions'
 class UIFileUpload extends React.Component {
   onChange(e){
      var file = e.target.files[0];
-     var formData = new FormData();
-     formData.append("file", file);
      AppActions.setPropertyForStore('imagen', file);
 
   }

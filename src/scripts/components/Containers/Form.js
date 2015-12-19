@@ -32,11 +32,10 @@ class Form extends React.Component {
           value = $("#"+key).code();
           break;
         case 'file':
-          imagen = AppActions.getPropertyFromStore('imagen');
+          imagen = ""
           console.log('imagen', imagen);
           break;
         default:
-          console.log(key)
           try {
             value = document.getElementById(key).value;
           }
@@ -46,22 +45,16 @@ class Form extends React.Component {
 
       }
 
-      if(value === undefined){
-        console.log('true')
-      }
-
-
-      if(value === 'on' && type === 'switch'){
-        value = true
-      } else if(value === 'off' && type === 'switch'){
-        value = false
+      if(value === 'true' && type === 'switch'){
+        value = 1
+      } else if(value === 'false' && type === 'switch'){
+        value = 0;
       }
 
       obj[key] = value;
     }
-    console.log('obj',obj)
 
-    this.props.makeAction.bind(this)(obj, imagen);
+    this.props.makeAction.bind(this)(obj);
 
 
   }

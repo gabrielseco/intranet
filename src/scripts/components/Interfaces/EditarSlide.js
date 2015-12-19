@@ -43,28 +43,28 @@ var form =
         NAME:'Activo',
         TYPE:'switch',
         CLASS:'',
-        VALUE:0
+        VALUE:''
       },
       {
         ID:'titulo',
         NAME:'Título',
         TYPE:'text',
         CLASS:'form-control',
-        VALUE: 'Slide 1'
+        VALUE: ''
       },
       {
         ID:'enlace',
         NAME:'Enlace',
         TYPE:'text',
         CLASS:'form-control',
-        VALUE: 'http://www.google.com'
+        VALUE: ''
       },
       {
         ID:'texto',
         NAME:'Texto',
         TYPE:'note',
         CLASS:'wysiwyg',
-        VALUE: '<p>esto es un texto</p>'
+        VALUE: ''
       },
       {
         ID:'imagenFD',
@@ -72,11 +72,11 @@ var form =
         TYPE:'img',
         CLASS:'img-thumbnail',
         FROM:'SERVER',
-        VALUE: 'http://sonarfm.cl/sonarfm/site/artic/20151018/imag/foto_0000000120151018151549.jpg',
+        VALUE: '',
         WIDTH:200
       },
       {
-        ID: 'subida',
+        ID: 'imagen',
         NAME: 'Reemplazar imagen',
         TYPE: 'file',
         CLASS: 'btn btn-info fileinput-button'
@@ -124,11 +124,17 @@ class ModificarSlide extends React.Component {
       this.setState({data: res})
     });
   }
-
+  makeUpload(id){
+    AppActions.uploadSlide(id, (res) => {
+      console.log('subida la imagen',res)
+      this.props.history.pushState(null, "/listar_slide");
+    })
+  }
   makeAction(obj){
     var id = this.props.params.id;
-    AppActions.editSlide(id,obj, (res) => {
-      this.props.history.pushState(null, "/listar_slide");
+    AppActions.editSlide(id, obj, (res) => {
+      console.log('editado el slide',res)
+      this.props.makeUpload.bind(this)(res.id)
     })
   }
 
@@ -143,7 +149,7 @@ class ModificarSlide extends React.Component {
           <div className="main-content" autoscroll="true" bs-affix-target="" init-ripples="">
             <section className='forms-advanced'>
               <UIPageHeader info={info}/>
-              <Form {...this.props} form={form} makeAction={this.makeAction}/>
+              <Form {...this.props} form={form} makeAction={this.makeAction} makeUpload={this.makeUpload}/>
             </section>
           </div>
         </div>
