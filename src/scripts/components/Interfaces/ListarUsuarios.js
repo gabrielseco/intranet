@@ -139,11 +139,11 @@ class ListarUsuarios extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {tabla: '', modalLoading: false}
+    this.state = {tabla: '', api:'user', modalLoading: false}
   }
   componentDidMount(){
     var headers = tabla.HEADERS;
-    AppActions.receiveUsers((res) => {
+    AppActions.getALL(this.state.api, (res) => {
       var tabla = mapToTable(res, headers, this.setModal.bind(this))
       this.setState({tabla: tabla})
     });
@@ -163,7 +163,7 @@ class ListarUsuarios extends React.Component {
 
     id = info.id;
 
-    AppActions.deleteUser(id, (res) => {
+    AppActions.delete(this.state.api, id, (res) => {
       location.reload()
     });
 
@@ -184,7 +184,7 @@ class ListarUsuarios extends React.Component {
               <UIDataTable data={tabla}/>
             </section>
           </div>
-          <UIModal {...this.props} data={infoModal} remove={this.remove} loading={this.state.modalLoading}/>
+          <UIModal {...this.props} data={infoModal} remove={this.remove.bind(this)} loading={this.state.modalLoading}/>
         </div>
         {this.props.children}
       </div>

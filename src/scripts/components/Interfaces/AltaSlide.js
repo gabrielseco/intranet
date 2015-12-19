@@ -98,15 +98,16 @@ class AltaSlide extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {api: 'slide'}
   }
-  makeUpload(id, imagen){
+  makeUpload(id){
     AppActions.uploadSlide(id, (res) => {
       console.log('subida la imagen',res)
       this.props.history.pushState(null, "/listar_slide");
     })
   }
-  makeAction(obj, imagen){
-    AppActions.addSlide(obj, (res) => {
+  makeAction(obj){
+    AppActions.add(this.props.api, obj, (res) => {
       console.log('creado el slide',res)
       this.props.makeUpload.bind(this)(res.id)
     })
@@ -122,7 +123,7 @@ class AltaSlide extends React.Component {
           <div className="main-content" autoscroll="true" bs-affix-target="" init-ripples="">
             <section className='forms-advanced'>
               <UIPageHeader info={info}/>
-              <Form {...this.props} form={form} makeAction={this.makeAction} makeUpload={this.makeUpload}/>
+              <Form {...this.state} {...this.props} form={form} makeAction={this.makeAction} makeUpload={this.makeUpload}/>
             </section>
           </div>
         </div>

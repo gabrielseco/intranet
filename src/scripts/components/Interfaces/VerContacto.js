@@ -40,12 +40,12 @@ class VerContacto extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {data:''}
+    this.state = {data:'', api: 'contactos'}
 
   }
   componentDidMount(){
     var id = this.props.params.id;
-    AppActions.showContact(id, (res) => {
+    AppActions.getOne(this.state.api, id, (res) => {
       console.log(res)
       this.setState({data: res})
     });

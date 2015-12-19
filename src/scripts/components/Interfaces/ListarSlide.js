@@ -137,11 +137,11 @@ function mapToTable(json, headers, modal){
 class ListarSlide extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {tabla: '', modalLoading: false}
+    this.state = {tabla: '',api:'slide', modalLoading: false}
   }
   componentDidMount(){
     var headers = tabla.HEADERS;
-    AppActions.receiveSlides((res) => {
+    AppActions.getALL(this.state.api, (res) => {
       console.log('slides',res)
       var tabla = mapToTable(res, headers, this.setModal.bind(this))
       this.setState({tabla: tabla})
@@ -162,7 +162,7 @@ class ListarSlide extends React.Component {
 
     id = info.id;
 
-    AppActions.deleteSlide(id, (res) => {
+    AppActions.delete(this.state.api, id, (res) => {
       location.reload()
     });
 
@@ -182,7 +182,7 @@ class ListarSlide extends React.Component {
               </div>
               <UIDataTable data={tabla}/>
             </section>
-            <UIModal {...this.props} data={infoModal} remove={this.remove} loading={this.state.modalLoading}/>
+            <UIModal {...this.props} data={infoModal} remove={this.remove.bind(this)} loading={this.state.modalLoading}/>
           </div>
         </div>
         {this.props.children}

@@ -123,12 +123,12 @@ class ListarContactos extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {tabla:'', modalLoading: ''}
+    this.state = {tabla:'',api: 'contactos', modalLoading: ''}
 
   }
   componentDidMount(){
     var headers = tabla.HEADERS;
-    AppActions.receiveContacts((res) => {
+    AppActions.getALL(this.state.api, (res) => {
       var tabla = mapToTable(res, headers, this.setModal.bind(this))
       this.setState({tabla: tabla})
     });
@@ -148,7 +148,7 @@ class ListarContactos extends React.Component {
 
     id = info.id;
 
-    AppActions.deleteContact(id, (res) => {
+    AppActions.delete(this.state.api, id, (res) => {
       location.reload()
     });
 
@@ -168,7 +168,7 @@ class ListarContactos extends React.Component {
               <UIDataTable data={tabla}/>
             </section>
           </div>
-          <UIModal {...this.props} data={infoModal} remove={this.remove} loading={this.state.modalLoading}/>
+          <UIModal {...this.props} data={infoModal} remove={this.remove.bind(this)} loading={this.state.modalLoading}/>
         </div>
         {this.props.children}
       </div>

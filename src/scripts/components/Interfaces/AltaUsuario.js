@@ -97,10 +97,11 @@ class AltaUsuario extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {api: 'user'}
   }
 
   makeAction(obj){
-    AppActions.addUser(obj, (res) => {
+    AppActions.add(this.state.api, obj, (res) => {
       console.log('crear usuario',res)
       this.props.history.pushState(null, "/");
     })
@@ -116,7 +117,7 @@ class AltaUsuario extends React.Component {
           <div className="main-content" autoscroll="true" bs-affix-target="" init-ripples="">
             <section className='forms-advanced'>
               <UIPageHeader info={info}/>
-              <Form {...this.props} form={form} makeAction={this.makeAction}/>
+              <Form {...this.props} form={form} makeAction={this.makeAction.bind(this)}/>
             </section>
           </div>
         </div>

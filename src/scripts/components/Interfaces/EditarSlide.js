@@ -5,6 +5,9 @@ import UIPageHeader from '../UI/PageHeader';
 import MainContainer from '../Containers/MainContainer';
 import Form from '../Containers/Form';
 
+//using functions to map values
+import mapValues from '../../lib'
+
 //flux
 import AppActions from '../../actions/app-actions';
 
@@ -99,42 +102,32 @@ var form =
     ]
   }
 
-  function mapValues(json){
-    for(var  i = 0; i < form.ELEMENTS.length; i++) {
-      var key = form.ELEMENTS[i].ID;
-
-      if(form.ELEMENTS[i].EXCLUDE !== true) {
-        form.ELEMENTS[i].VALUE = json[key]
-      }
-    }
-
-  }
-
 class ModificarSlide extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { data: '' }
+    this.state = { data: '', api: 'slide' }
   }
 
   componentDidMount(){
     var id = this.props.params.id;
-    AppActions.getSlide(id, (res) => {
-      mapValues(res);
+    AppActions.getOne(this.state.api, id, (res) => {
+      mapValues(res, form);
       this.setState({data: res})
     });
   }
-  makeUpload(id){
-    AppActions.uploadSlide(id, (res) => {
+  makeUpload(){
+    var id = this.props.params.id;
+    AppActions.uploadSlide(+id, (res) => {
       console.log('subida la imagen',res)
       this.props.history.pushState(null, "/listar_slide");
     })
   }
   makeAction(obj){
     var id = this.props.params.id;
-    AppActions.editSlide(id, obj, (res) => {
+    AppActions.update(this.props.api, id, obj, (res) => {
       console.log('editado el slide',res)
-      this.props.makeUpload.bind(this)(res.id)
+      this.props.makeUpload.bind(this)()
     })
   }
 
@@ -149,7 +142,7 @@ class ModificarSlide extends React.Component {
           <div className="main-content" autoscroll="true" bs-affix-target="" init-ripples="">
             <section className='forms-advanced'>
               <UIPageHeader info={info}/>
-              <Form {...this.props} form={form} makeAction={this.makeAction} makeUpload={this.makeUpload}/>
+              <Form {...this.state} {...this.props} form={form} makeAction={this.makeAction} makeUpload={this.makeUpload}/>
             </section>
           </div>
         </div>

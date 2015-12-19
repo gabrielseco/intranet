@@ -5,6 +5,9 @@ import UIPageHeader from '../UI/PageHeader';
 import MainContainer from '../Containers/MainContainer';
 import Form from '../Containers/Form';
 
+//using functions to map values
+import mapValues from '../../lib'
+
 //flux
 import AppActions from '../../actions/app-actions';
 
@@ -87,36 +90,26 @@ var form =
   }
 
 
-  function mapValues(json){
-    for(var  i = 0; i < form.ELEMENTS.length; i++) {
-      var key = form.ELEMENTS[i].ID;
-
-      if(form.ELEMENTS[i].EXCLUDE !== true) {
-        form.ELEMENTS[i].VALUE = json[key]
-      }
-    }
-
-  }
 
 
 class EditarUsuario extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { data: '' }
+    this.state = { data: '', api: 'user' }
   }
 
   componentDidMount(){
     var id = this.props.params.id;
-    AppActions.getUser(id, (res) => {
-      mapValues(res);
+    AppActions.getOne(this.state.api, id, (res) => {
+      mapValues(res, form);
       this.setState({data: res})
     });
   }
 
   makeAction(obj){
     var id = this.props.params.id;
-    AppActions.editUser(id,obj, (res) => {
+    AppActions.update(this.state.api, id, obj, (res) => {
       this.props.history.pushState(null, "/");
     })
   }
@@ -131,7 +124,7 @@ class EditarUsuario extends React.Component {
           <div className="main-content" autoscroll="true" bs-affix-target="" init-ripples="">
             <section className='forms-advanced'>
               <UIPageHeader info={info}/>
-              <Form {...this.props} form={form} makeAction={this.makeAction}/>
+              <Form {...this.props} form={form} makeAction={this.makeAction.bind(this)}/>
             </section>
           </div>
         </div>

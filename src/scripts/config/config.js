@@ -62,7 +62,19 @@ module.exports.menu = [
         LINK: '#/anade_noticia',
         ID:'anade-noticia',
         NOTIFICATIONS:''
-      }
+      },
+      {
+        NAME: 'Listado de categorías',
+        LINK: '/#listar_noticias_categorias',
+        ID:'listar-noticias-categorias',
+        NOTIFICATION:''
+      },
+      {
+        NAME: 'Añade categoria',
+        LINK: '/#anade_categoria_noticias',
+        ID:'anade-categoria-noticias',
+        NOTIFICATION:''
+      },
     ],
   },
   {
