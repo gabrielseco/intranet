@@ -7,9 +7,8 @@ class UIFileUpload extends React.Component {
   onChange(e){
      var file = e.target.files[0];
      var formData = new FormData();
-     formData.append("file", e.target.files[0]);
-     console.log(JSON.stringify(formData))
-     AppActions.setPropertyForStore('imagen', formData);
+     formData.append("file", file);
+     AppActions.setPropertyForStore('imagen', file);
 
   }
   render(){

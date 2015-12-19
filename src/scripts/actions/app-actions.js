@@ -98,13 +98,50 @@ export default {
       actionType: AppConstants.UPLOAD_SLIDE
     })
     console.log('imagen act',imagen)
-    var obj = {
-      id: id,
-      imagen: imagen
-    }
-    axios.post('http://localhost:1337/slide/uploadImagen/',obj)
+    var data = new FormData();
+         data.append('id', +id);
+         data.append('file', imagen);
+         
+    axios.post('http://localhost:1337/slide/uploadImagen/',data)
          .then(function(response){
            cb(response.data)
          })
   },
+  receiveSlides(cb){
+    dispatch({
+      actionType: AppConstants.RECEIVE_SLIDES
+    })
+    axios.get('http://localhost:1337/slide')
+         .then(function(response){
+           cb(response.data);
+   })
+ },
+ deleteSlide(id, cb){
+   dispatch({
+     actionType: AppConstants.DELETE_SLIDE
+   });
+   axios.delete('http://localhost:1337/slide/'+id)
+        .then(function(response){
+          cb(response.data);
+        })
+ },
+ getSlide(id, cb) {
+   dispatch({
+     actionType: AppConstants.GET_SLIDE
+   })
+   axios.get('http://localhost:1337/slide/'+id)
+        .then(function(response){
+          cb(response.data)
+        })
+ },
+ editSlide(id, obj, cb) {
+   dispatch({
+     actionType: AppConstants.EDIT_SLIDE
+   });
+
+   axios.post('http://localhost:1337/slide/'+id, obj)
+        .then(function(response){
+          cb(response.data);
+        })
+ },
 }

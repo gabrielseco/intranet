@@ -14,7 +14,7 @@ import ListarUsuarios from './Interfaces/ListarUsuarios'
 
 /* SLIDE */
 import AltaSlide from './Interfaces/AltaSlide';
-import ModificarSlide from './Interfaces/ModificarSlide'
+import EditarSlide from './Interfaces/EditarSlide'
 import ListarSlide from './Interfaces/ListarSlide'
 
 
@@ -64,6 +64,7 @@ try {
           <Route path="/anade_portfolio" name="anade_portfolio" component={AltaPortfolio}/>
 
           <Route path="/editar_usuario/:id" name="editar_usuario" component={EditarUsuario}/>
+          <Route path="/editar_slide/:id" name="editar_slide" component={EditarSlide}/>
 
 
           <Route path="/ver_contacto/:id" name="ver_contacto" component={VerContacto}/>

@@ -9,7 +9,9 @@ class UIInput extends React.Component {
       <div>
         <input id={this.props.data.ID} type={this.props.data.TYPE}
                 className={this.props.data.CLASS} required={this.props.data.REQUIRED}
-                data-error={this.props.data.VALIDATION} defaultValue={this.props.data.VALUE} onChange={this._onChange.bind(this)}/>
+                data-error={this.props.data.VALIDATION} defaultValue={this.props.data.VALUE}
+                autoComplete="off"
+                onChange={this._onChange.bind(this)}/>
         <div className="help-block with-errors"></div>
       </div>
 

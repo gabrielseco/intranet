@@ -58,7 +58,7 @@ var form =
         NAME:'Enlace',
         TYPE:'text',
         CLASS:'form-control',
-        VALUE: 'http://www.'
+        VALUE: ''
       },
       {
         ID:'texto',
@@ -102,12 +102,13 @@ class AltaSlide extends React.Component {
   makeUpload(id, imagen){
     AppActions.uploadSlide(id, imagen, (res) => {
       console.log('subida la imagen',res)
+      this.props.history.pushState(null, "/listar_slide");
     })
   }
   makeAction(obj, imagen){
     AppActions.addSlide(obj, (res) => {
       console.log('creado el slide',res)
-      this.props.makeUpload(res.id, imagen)
+      this.props.makeUpload.bind(this)(res.id, imagen)
     })
   }
 

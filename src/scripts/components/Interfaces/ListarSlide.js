@@ -1,17 +1,28 @@
 import React, { Component, PropTypes } from 'react'
+import moment from 'moment';
 import UISideBar from '../UI/SideBar';
 import UIPageHeader from '../UI/PageHeader';
 import MainContainer from '../Containers/MainContainer';
 import UIDataTable from '../UI/Datatable';
 import HigherButton from '../HigherComponents/HigherButton'
+import UIButton from '../UI/Button';
+import UIModal from '../UI/Modal'
+import UIImagen from '../UI/Imagen'
+
+
+//flux
+import AppActions from '../../actions/app-actions';
 
 //config tiene el menú y la configuración del usuario
 import config from '../../config/config'
 
+var titulo = 'Slide'
+var texto  = 'Listado de banners'
+
 var info = {
-    TITULO : 'Slide',
+    TITULO : titulo,
     ICON: 'md md-list',
-    TEXTO: 'Listado de banners'
+    TEXTO: texto
 }
 
 var breadcrumb = [
@@ -20,10 +31,10 @@ var breadcrumb = [
     LINK:'http://www.ggseco.com'
   },
   {
-    NAME: 'Slide'
+    NAME: titulo
   },
   {
-    NAME: 'Listado de banners'
+    NAME: texto
   }
 ]
 
@@ -51,23 +62,7 @@ var tabla = {
       SORT: false
     }
   ],
-  BODY:[
-    {
-        FECHA:'20/10/12',
-        IMAGEN:'',
-        NOMBRE: 'Slide',
-        EDITAR:'<Button class="btn btn-primary">Editar</button>',
-        BORRAR:'<button class="btn btn-danger">Borrar</button>'
-    },
-    {
-        FECHA:'20/10/12',
-        IMAGEN:'',
-        Nombre:'Slide 2',
-        EDITAR:'<button class="btn btn-primary">Editar</button>',
-        BORRAR: '<button class="btn btn-danger">Borrar</button>'
-    },
-
-  ]
+  BODY:[]
 };
 
 var button = {
@@ -78,10 +73,97 @@ var button = {
   LINK: 'anade_slide'
 };
 
+var infoModal = {
+  COMPONENT:'Slide',
+  NAME: ''
+}
+
+function mapToTable(json, headers, modal){
+
+
+  var body = [];
+
+
+  for(var i = 0; i < json.length; i++){
+    var fecha = moment(json[i]["alta"]).format("DD/MM/YYYY")
+
+    var borrar = {
+      CLASS:'btn btn-danger',
+      NAME:'Eliminar',
+      refComponent: 'eliminar',
+      ACTION: modal,
+      STORE: 'idSlide'
+    }
+
+    var editar = {
+      CLASS:'btn btn-primary',
+      NAME:'Editar',
+      refComponent: 'editar',
+      LINK:'editar_slide',
+    }
+
+    editar.ID = json[i]["id"];
+    borrar.ID = json[i];
+
+    borrar.ACTIONS = AppActions
+
+    var imagen = {
+      URL:"http://localhost:1337/images/"+json[i]["imagenFD"],
+      WIDTH:200,
+      TITLE:json[i]["titulo"]
+    }
+    var obj = {
+      fecha: fecha,
+      imagen: <UIImagen data={imagen}/>,
+      titulo: json[i]["titulo"],
+      editar: <UIButton data={editar}/>,
+      eliminar: <UIButton data={borrar} />
+    }
+
+    body.push(obj)
+  }
+
+
+  tabla.BODY = body;
+
+
+}
+
 class ListarSlide extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {tabla: '', modalLoading: false}
+  }
+  componentDidMount(){
+    var headers = tabla.HEADERS;
+    AppActions.receiveSlides((res) => {
+      console.log('slides',res)
+      var tabla = mapToTable(res, headers, this.setModal.bind(this))
+      this.setState({tabla: tabla})
+    });
 
+  }
+  setModal(){
+    this.setState({
+      modalLoading: true
+    })
+    var info = AppActions.getPropertyFromStore('idSlide');
+    infoModal.NAME = info.titulo;
+  }
+  remove(){
+    console.log('remove')
+    var id = 0;
+    info = AppActions.getPropertyFromStore('idSlide');
+
+    id = info.id;
+
+    AppActions.deleteSlide(id, (res) => {
+      location.reload()
+    });
+
+  }
   render() {
-
+    if(this.state.tabla !== ''){
     return (
       <div>
         <UISideBar data={config}/>
@@ -95,11 +177,16 @@ class ListarSlide extends React.Component {
               </div>
               <UIDataTable data={tabla}/>
             </section>
+            <UIModal {...this.props} data={infoModal} remove={this.remove} loading={this.state.modalLoading}/>
           </div>
         </div>
         {this.props.children}
       </div>
     );
   }
+  else {
+    return (<div></div>)
+  }
+}
 }
 export default ListarSlide

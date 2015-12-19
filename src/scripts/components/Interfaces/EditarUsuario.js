@@ -21,7 +21,8 @@ var info = {
 
 var breadcrumb = [
   {
-    NAME: 'GGSECO.COM'
+    NAME: 'GGSECO.COM',
+    LINK:'http://www.ggseco.com'
   },
   {
     NAME: titulo

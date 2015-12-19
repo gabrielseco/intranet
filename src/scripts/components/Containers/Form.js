@@ -27,21 +27,34 @@ class Form extends React.Component {
       var type  = this.props.form.ELEMENTS[i].TYPE;
       var value = "";
 
-      if(type === 'note'){
-        value = $("#"+key).code();
-      } else {
-        value = document.getElementById(key).value;
-     }
+      switch(type){
+        case 'note':
+          value = $("#"+key).code();
+          break;
+        case 'file':
+          imagen = AppActions.getPropertyFromStore('imagen');
+          console.log('imagen', imagen);
+          break;
+        default:
+          console.log(key)
+          try {
+            value = document.getElementById(key).value;
+          }
+          catch(err) {
+            value = this.props.form.ELEMENTS[i].VALUE;
+          }
+
+      }
+
+      if(value === undefined){
+        console.log('true')
+      }
+
 
       if(value === 'on' && type === 'switch'){
         value = true
       } else if(value === 'off' && type === 'switch'){
         value = false
-      }
-
-      if(type === 'file'){
-        imagen = AppActions.getPropertyFromStore('imagen');
-        console.log('imagen', imagen);
       }
 
       obj[key] = value;
