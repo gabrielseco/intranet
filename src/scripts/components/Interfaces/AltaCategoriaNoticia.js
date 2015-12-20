@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import {Link} from 'react-router';
 import UISideBar from '../UI/SideBar';
 import UIPageHeader from '../UI/PageHeader';
 import MainContainer from '../Containers/MainContainer';
@@ -11,15 +10,14 @@ import AppActions from '../../actions/app-actions';
 //config tiene el menú y la configuración del usuario
 import config from '../../config/config'
 
-var titulo = 'Usuarios';
-var texto  = 'Alta de usuario'
-
+var titulo = 'Categorías';
 
 var info = {
     TITULO : titulo,
     ICON: 'md-add-circle',
-    TEXTO: 'Desde este formulario puedes crear usuarios nuevos'
+    TEXTO: 'Desde este formulario puedes crear categorías'
 }
+
 var breadcrumb = [
   {
     NAME: 'GGSECO.COM',
@@ -29,59 +27,40 @@ var breadcrumb = [
     NAME: titulo
   },
   {
-    NAME: texto
+    NAME: 'Alta de categoría de una noticia'
   }
 ]
+
 var form =
   {
-    TITULO:texto,
+    TITULO:'Alta de categoría',
     ELEMENTS:[
       {
         ID:'activo',
         NAME:'Activo',
         TYPE:'switch',
         CLASS:'',
-        VALUE:0,
+        VALUE:0
       },
       {
-        ID:'usuario',
-        NAME:'Usuario',
+        ID:'titulo',
+        NAME:'Título',
         TYPE:'text',
+        TAKECONTROL:'slug',
         CLASS:'form-control',
         VALUE: '',
         REQUIRED: true,
         VALIDATION:'El campo es requerido'
       },
       {
-        ID:'password',
-        NAME:'Password',
-        TYPE:'password',
-        CLASS:'form-control',
-        VALUE: '',
-        REQUIRED: true,
-       'VALIDATION':'El campo es requerido'
-
-      },
-      {
-        ID:'email',
-        NAME:'Email',
-        TYPE:'text',
-        CLASS:'form-control',
-        VALUE: '',
-        REQUIRED: true,
-        VALIDATION:'El campo es requerido'
-      },
-      {
-        ID:'nombre',
-        NAME:'Nombre',
+        ID:'slug',
+        NAME:'URL',
         TYPE:'text',
         CLASS:'form-control',
         VALUE: '',
         REQUIRED: false,
         VALIDATION:''
       },
-
-
     ],
     BUTTONS: [
       {
@@ -100,19 +79,17 @@ var form =
 
 
 
-
-
-class AltaUsuario extends React.Component {
+class AltaCategoriaNoticia extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {api: 'user'}
-  }
+    this.state = {api: 'categorias_noticias'}
 
+  }
   makeAction(obj){
     AppActions.add(this.state.api, obj, (res) => {
-      console.log('crear usuario',res)
-      this.props.history.pushState(null, "/");
+      console.log('crear categoria_noticia',res)
+      this.props.history.pushState(null, "/listar_noticias_categorias");
     })
   }
 
@@ -135,4 +112,4 @@ class AltaUsuario extends React.Component {
     );
   }
 }
-export default AltaUsuario
+export default AltaCategoriaNoticia

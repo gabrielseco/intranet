@@ -1,10 +1,16 @@
 import React, { Component, PropTypes } from 'react'
+import { slugify } from '../../lib'
+
 
 class UIInput extends React.Component {
   _onChange(e){
     this.props.data.VALUE = e.target.value;
+    if(this.props.data.TAKECONTROL !== '') {
+      document.getElementById(this.props.data.TAKECONTROL).value = slugify(this.props.data.TAKECONTROL, e.target.value)
+    }
   }
   render(){
+    console.log(this.props.data.ID);
     return (
       <div>
         <input id={this.props.data.ID} type={this.props.data.TYPE}

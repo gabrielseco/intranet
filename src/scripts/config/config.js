@@ -75,6 +75,18 @@ module.exports.menu = [
         ID:'anade-categoria-noticias',
         NOTIFICATION:''
       },
+      {
+        NAME: 'Listado de tags',
+        LINK: '/#listar_tags_categorias',
+        ID:'listar-tags-categorias',
+        NOTIFICATION:''
+      },
+      {
+        NAME: 'Añade tag',
+        LINK: '/#anade_tag_noticias',
+        ID:'anade-tag-noticias',
+        NOTIFICATION:''
+      },
     ],
   },
   {

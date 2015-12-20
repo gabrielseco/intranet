@@ -6,7 +6,7 @@ import MainContainer from '../Containers/MainContainer';
 import Form from '../Containers/Form';
 
 //using functions to map values
-import mapValues from '../../lib'
+import { mapValues } from '../../lib'
 
 //flux
 import AppActions from '../../actions/app-actions';
@@ -72,6 +72,15 @@ var form =
         VALUE: '',
         REQUIRED: true,
         VALIDATION:'El campo es requerido'
+      },
+      {
+        ID:'nombre',
+        NAME:'Nombre',
+        TYPE:'text',
+        CLASS:'form-control',
+        VALUE: '',
+        REQUIRED: false,
+        VALIDATION:''
       },
 
     ],

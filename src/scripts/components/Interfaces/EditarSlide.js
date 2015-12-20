@@ -6,7 +6,7 @@ import MainContainer from '../Containers/MainContainer';
 import Form from '../Containers/Form';
 
 //using functions to map values
-import mapValues from '../../lib'
+import { mapValues } from '../../lib'
 
 //flux
 import AppActions from '../../actions/app-actions';
@@ -102,7 +102,7 @@ var form =
     ]
   }
 
-class ModificarSlide extends React.Component {
+class EditarSlide extends React.Component {
 
   constructor(props) {
     super(props);
@@ -154,4 +154,4 @@ class ModificarSlide extends React.Component {
   }
   }
 }
-export default ModificarSlide
+export default EditarSlide

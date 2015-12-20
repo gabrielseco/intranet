@@ -5,83 +5,71 @@ import UIPageHeader from '../UI/PageHeader';
 import MainContainer from '../Containers/MainContainer';
 import Form from '../Containers/Form';
 
+//using functions to map values
+import { mapValues } from '../../lib'
+
 //flux
 import AppActions from '../../actions/app-actions';
 
 //config tiene el menú y la configuración del usuario
 import config from '../../config/config'
 
-var titulo = 'Usuarios';
-var texto  = 'Alta de usuario'
+var titulo = 'Categorías'
 
 
 var info = {
     TITULO : titulo,
     ICON: 'md-add-circle',
-    TEXTO: 'Desde este formulario puedes crear usuarios nuevos'
+    TEXTO: 'Desde este formulario puedes modificar categorías'
 }
+
 var breadcrumb = [
   {
     NAME: 'GGSECO.COM',
     LINK:'http://www.ggseco.com'
   },
   {
+    NAME: 'Noticias'
+  },
+  {
     NAME: titulo
   },
   {
-    NAME: texto
+    NAME: 'Edición de categoría'
   }
 ]
+
+
 var form =
   {
-    TITULO:texto,
+    TITULO:'Edición de categoría',
     ELEMENTS:[
       {
         ID:'activo',
         NAME:'Activo',
         TYPE:'switch',
         CLASS:'',
-        VALUE:0,
+        VALUE:0
       },
       {
-        ID:'usuario',
-        NAME:'Usuario',
+        ID:'titulo',
+        NAME:'Título',
         TYPE:'text',
+        TAKECONTROL:'slug',
         CLASS:'form-control',
         VALUE: '',
         REQUIRED: true,
         VALIDATION:'El campo es requerido'
       },
       {
-        ID:'password',
-        NAME:'Password',
-        TYPE:'password',
-        CLASS:'form-control',
-        VALUE: '',
-        REQUIRED: true,
-       'VALIDATION':'El campo es requerido'
-
-      },
-      {
-        ID:'email',
-        NAME:'Email',
-        TYPE:'text',
-        CLASS:'form-control',
-        VALUE: '',
-        REQUIRED: true,
-        VALIDATION:'El campo es requerido'
-      },
-      {
-        ID:'nombre',
-        NAME:'Nombre',
+        ID:'slug',
+        NAME:'URL',
         TYPE:'text',
         CLASS:'form-control',
         VALUE: '',
         REQUIRED: false,
         VALIDATION:''
       },
-
-
     ],
     BUTTONS: [
       {
@@ -98,25 +86,31 @@ var form =
   }
 
 
-
-
-
-
-class AltaUsuario extends React.Component {
+class EditarCategoriaNoticia extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {api: 'user'}
+    this.state = { data: '', api: 'categorias_noticias' }
   }
 
+  componentDidMount(){
+    var id = this.props.params.id;
+    AppActions.getOne(this.state.api, id, (res) => {
+      console.log(res)
+      mapValues(res, form);
+      this.setState({data: res})
+    });
+  }
   makeAction(obj){
-    AppActions.add(this.state.api, obj, (res) => {
-      console.log('crear usuario',res)
-      this.props.history.pushState(null, "/");
+    var id = this.props.params.id;
+    AppActions.update(this.props.api, id, obj, (res) => {
+      console.log('editado categoria_noticia',res)
+      this.props.history.pushState(null, "/listar_noticias_categorias");
     })
   }
 
   render() {
+    if(this.state.data !== ''){
 
     return (
       <div>
@@ -126,13 +120,16 @@ class AltaUsuario extends React.Component {
           <div className="main-content" autoscroll="true" bs-affix-target="" init-ripples="">
             <section className='forms-advanced'>
               <UIPageHeader info={info}/>
-              <Form {...this.props} form={form} makeAction={this.makeAction.bind(this)}/>
+              <Form {...this.state} {...this.props} form={form} makeAction={this.makeAction}/>
             </section>
           </div>
         </div>
         {this.props.children}
       </div>
     );
+  } else {
+    return (<div></div>)
+  }
   }
 }
-export default AltaUsuario
+export default EditarCategoriaNoticia
