@@ -12,6 +12,9 @@ class UIButton extends React.Component {
         this.props.data.ACTION()
     }
   }
+  goBack(){
+    this.props.history.goBack()
+  }
   render(){
 
     var span = {}
@@ -41,6 +44,15 @@ class UIButton extends React.Component {
         </button>
       )
     }
+    if(this.props.data.NAME === 'Cancelar') {
+      return (
+        <button ref={this.props.data.refComponent} type={this.props.data.TYPE}
+                className={this.props.data.CLASS}
+                onClick={this.goBack.bind(this)}>
+                {span }
+        </button>
+      )
+    }
     return (
       <button type={this.props.data.TYPE}
               className={this.props.data.CLASS}
@@ -54,6 +66,7 @@ class UIButton extends React.Component {
   }
 
 }
+
 
 UIButton.propTypes = {
   data: PropTypes.object.isRequired,

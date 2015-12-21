@@ -77,8 +77,8 @@ module.exports.menu = [
       },
       {
         NAME: 'Listado de tags',
-        LINK: '/#listar_tags_categorias',
-        ID:'listar-tags-categorias',
+        LINK: '/#listar_noticias_tags',
+        ID:'listar_noticias_tags',
         NOTIFICATION:''
       },
       {

@@ -73,7 +73,7 @@ class Form extends React.Component {
               <fieldset>
                 <legend>{this.props.form.TITULO}</legend>
                 {elements}
-                <ButtonGroup data={this.props.form.BUTTONS}/>
+                <ButtonGroup {...this.props} data={this.props.form.BUTTONS}/>
               </fieldset>
             </form>
           </div>

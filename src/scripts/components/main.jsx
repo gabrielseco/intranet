@@ -34,6 +34,8 @@ import EditarCategoriaNoticia from './Interfaces/EditarCategoriaNoticia'
 /* TAGS NOTICIAS */
 
 import ListarTagsNoticias from './Interfaces/ListarTagsNoticias'
+import AltaTagNoticia from './Interfaces/AltaTagNoticia'
+import EditarTagNoticia from './Interfaces/EditarTagNoticia'
 
 
 /*PORTFOLIO*/
@@ -65,7 +67,7 @@ try {
           <Route path="/listar_contactos" name="listar_contactos" component={ListarContactos}/>
           <Route path="/listar_noticias" name="listar_noticias" component={ListarNoticias}/>
           <Route path="/listar_noticias_categorias" name="listar_noticias_categorias" component={ListarCategoriasNoticias}/>
-          <Route path="/listar_tags_categorias" name="listar_tags_categorias" component={ListarTagsNoticias}/>
+          <Route path="/listar_noticias_tags" name="listar_noticias_tags" component={ListarTagsNoticias}/>
           <Route path="/listar_portfolio" name="listar_portfolio" component={ListarPortfolio}/>
 
 
@@ -74,10 +76,12 @@ try {
           <Route path="/anade_noticia" name="anade_noticia" component={AltaNoticia}/>
           <Route path="/anade_portfolio" name="anade_portfolio" component={AltaPortfolio}/>
           <Route path="/anade_categoria_noticias" name="anade_categoria_noticias" component={AltaCategoriaNoticia}/>
+          <Route path="/anade_tag_noticias" name="anade_tag_noticias" component={AltaTagNoticia}/>
 
           <Route path="/editar_usuario/:id" name="editar_usuario" component={EditarUsuario}/>
           <Route path="/editar_slide/:id" name="editar_slide" component={EditarSlide}/>
           <Route path="/editar_categoria_noticias/:id" name="editar_categoria_noticias" component={EditarCategoriaNoticia}/>
+          <Route path="/editar_tag_noticias/:id" name="editar_tag_noticias" component={EditarTagNoticia}/>
 
 
           <Route path="/ver_contacto/:id" name="ver_contacto" component={VerContacto}/>

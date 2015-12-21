@@ -1,8 +1,12 @@
 import React, { Component, PropTypes } from 'react'
+import {Link} from 'react-router';
 import UISideBar from '../UI/SideBar';
 import UIPageHeader from '../UI/PageHeader';
 import MainContainer from '../Containers/MainContainer';
 import Form from '../Containers/Form';
+
+//using functions to map values
+import { mapValues } from '../../lib'
 
 //flux
 import AppActions from '../../actions/app-actions';
@@ -10,12 +14,13 @@ import AppActions from '../../actions/app-actions';
 //config tiene el menú y la configuración del usuario
 import config from '../../config/config'
 
-var titulo = 'Categorías';
+var titulo = 'Tags'
+
 
 var info = {
     TITULO : titulo,
     ICON: 'md-add-circle',
-    TEXTO: 'Desde este formulario puedes crear categorías'
+    TEXTO: 'Desde este formulario puedes modificar tags'
 }
 
 var breadcrumb = [
@@ -24,16 +29,20 @@ var breadcrumb = [
     LINK:'http://www.ggseco.com'
   },
   {
+    NAME: 'Noticias'
+  },
+  {
     NAME: titulo
   },
   {
-    NAME: 'Alta de categoría de una noticia'
+    NAME: 'Edición de tag'
   }
 ]
 
+
 var form =
   {
-    TITULO:'Alta de categoría',
+    TITULO:'Edición de tag',
     ELEMENTS:[
       {
         ID:'activo',
@@ -71,29 +80,37 @@ var form =
       {
         NAME:'Cancelar',
         CLASS:'btn btn-default',
-        TYPE:'button',
+        TYPE:'button'
       }
     ]
   }
 
 
-
-
-class AltaCategoriaNoticia extends React.Component {
+class EditarTagNoticia extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {api: 'categorias_noticias'}
+    this.state = { data: '', api: 'tags_noticias' }
+  }
 
+  componentDidMount(){
+    var id = this.props.params.id;
+    AppActions.getOne(this.state.api, id, (res) => {
+      console.log(res)
+      mapValues(res, form);
+      this.setState({data: res})
+    });
   }
   makeAction(obj){
-    AppActions.add(this.state.api, obj, (res) => {
-      console.log('crear categoria_noticia',res)
-      this.props.history.pushState(null, "/listar_noticias_categorias");
+    var id = this.props.params.id;
+    AppActions.update(this.props.api, id, obj, (res) => {
+      console.log('editado tag_noticia',res)
+      this.props.history.pushState(null, "/listar_noticias_tags");
     })
   }
 
   render() {
+    if(this.state.data !== ''){
 
     return (
       <div>
@@ -103,13 +120,16 @@ class AltaCategoriaNoticia extends React.Component {
           <div className="main-content" autoscroll="true" bs-affix-target="" init-ripples="">
             <section className='forms-advanced'>
               <UIPageHeader info={info}/>
-              <Form {...this.props} form={form} makeAction={this.makeAction.bind(this)}/>
+              <Form {...this.state} {...this.props} form={form} makeAction={this.makeAction}/>
             </section>
           </div>
         </div>
         {this.props.children}
       </div>
     );
+  } else {
+    return (<div></div>)
+  }
   }
 }
-export default AltaCategoriaNoticia
+export default EditarTagNoticia

@@ -10,12 +10,12 @@ import AppActions from '../../actions/app-actions';
 //config tiene el menú y la configuración del usuario
 import config from '../../config/config'
 
-var titulo = 'Categorías';
+var titulo = 'Tags';
 
 var info = {
     TITULO : titulo,
     ICON: 'md-add-circle',
-    TEXTO: 'Desde este formulario puedes crear categorías'
+    TEXTO: 'Desde este formulario puedes crear tags'
 }
 
 var breadcrumb = [
@@ -27,13 +27,13 @@ var breadcrumb = [
     NAME: titulo
   },
   {
-    NAME: 'Alta de categoría de una noticia'
+    NAME: 'Alta de tag de una noticia'
   }
 ]
 
 var form =
   {
-    TITULO:'Alta de categoría',
+    TITULO:'Alta de tag',
     ELEMENTS:[
       {
         ID:'activo',
@@ -71,7 +71,7 @@ var form =
       {
         NAME:'Cancelar',
         CLASS:'btn btn-default',
-        TYPE:'button',
+        TYPE:'button'
       }
     ]
   }
@@ -79,17 +79,17 @@ var form =
 
 
 
-class AltaCategoriaNoticia extends React.Component {
+class AltaTagNoticia extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {api: 'categorias_noticias'}
+    this.state = {api: 'tags_noticias'}
 
   }
   makeAction(obj){
     AppActions.add(this.state.api, obj, (res) => {
-      console.log('crear categoria_noticia',res)
-      this.props.history.pushState(null, "/listar_noticias_categorias");
+      console.log('crear tag_noticia',res)
+      this.props.history.pushState(null, "/listar_noticias_tags");
     })
   }
 
@@ -112,4 +112,4 @@ class AltaCategoriaNoticia extends React.Component {
     );
   }
 }
-export default AltaCategoriaNoticia
+export default AltaTagNoticia

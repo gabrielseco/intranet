@@ -54,6 +54,10 @@ var infoModal = {
 var tabla = {
   HEADERS:[
     {
+      NAME:'Activo',
+      SORT:true
+    },
+    {
       NAME:'Titulo',
       SORT: true,
     },
@@ -102,7 +106,7 @@ function mapToTable(json, headers, modal){
       CLASS:'btn btn-primary',
       NAME:'Editar',
       refComponent: 'editar',
-      LINK:'editar_categoria_noticias',
+      LINK:'editar_tag_noticias',
     }
 
     editar.ID = json[i]["id"];
@@ -111,6 +115,7 @@ function mapToTable(json, headers, modal){
     borrar.ACTIONS = AppActions
 
     var obj = {
+      activo: json[i]["activo"] ? "Sí" : "No",
       usuario: json[i]["titulo"],
       editar: <UIButton data={editar}/>,
       eliminar: <UIButton data={borrar} />

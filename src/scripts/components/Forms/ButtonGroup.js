@@ -5,7 +5,7 @@ class ButtonGroup extends React.Component {
 
   render(){
     var buttons = this.props.data.map((button, i ) => {
-      return <UIButton key={i} data={button}/>
+      return <UIButton {...this.props} key={i} data={button}/>
     })
     return (
       <div>
