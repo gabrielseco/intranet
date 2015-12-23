@@ -42,16 +42,12 @@ var breadcrumb = [
 var tabla = {
   HEADERS:[
     {
-      NAME: 'Fecha',
-      SORT: true
+      NAME:'Imagen',
+      SORT: false
     },
     {
       NAME: 'Activo',
       SORT: true
-    },
-    {
-      NAME:'Imagen',
-      SORT: false
     },
     {
       NAME:'Nombre',
@@ -89,7 +85,6 @@ function mapToTable(json, headers, modal){
 
 
   for(var i = 0; i < json.length; i++){
-    var fecha = moment(json[i]["alta"]).format("DD/MM/YYYY")
 
     var borrar = {
       CLASS:'btn btn-danger',
@@ -117,9 +112,8 @@ function mapToTable(json, headers, modal){
       TITLE:json[i]["titulo"]
     }
     var obj = {
-      fecha: fecha,
-      activo: json[i]["activo"] ? "Sí" : "No",
       imagen: <UIImagen data={imagen}/>,
+      activo: json[i]["activo"] ? "Sí" : "No",
       titulo: json[i]["titulo"],
       editar: <UIButton data={editar}/>,
       eliminar: <UIButton data={borrar} />
