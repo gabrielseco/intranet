@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import {Link} from 'react-router';
+import moment from 'moment';
 import UISideBar from '../UI/SideBar';
 import UIPageHeader from '../UI/PageHeader';
 import MainContainer from '../Containers/MainContainer';
@@ -13,6 +13,7 @@ import AppActions from '../../actions/app-actions';
 
 //config tiene el menú y la configuración del usuario
 import config from '../../config/config'
+
 
 var titulo = 'Noticia';
 
@@ -44,28 +45,51 @@ var form =
         NAME:'Activo',
         TYPE:'switch',
         CLASS:'',
-        VALUE:0
+        VALUE:0,
+        EXCLUDE:true
+
+      },
+      {
+        ID:'fecha',
+        NAME:'Fecha',
+        TYPE:'datepicker',
+        CLASS:'',
+        VALUE:moment().format("YYYY-MM-DD"),
+        EXCLUDE:true
+
       },
       {
         ID:'titulo',
         NAME:'Título',
         TYPE:'text',
         CLASS:'form-control',
+        TAKECONTROL:'slug',
         VALUE: '',
         REQUIRED: true,
-        VALIDATION:'El campo es requerido'
+        VALIDATION:'El campo es requerido',
+        EXCLUDE:true
       },
       {
-        ID:'categorias',
+        ID:'slug',
+        NAME:'URL',
+        TYPE:'text',
+        CLASS:'form-control',
+        VALUE: '',
+        REQUIRED: false,
+        VALIDATION:'',
+        EXCLUDE:true
+      },
+      {
+        ID:'categorias_noticias',
         NAME:'Categorías',
         TYPE:'select-multiple',
         CLASS:'',
-        VALUE: [{"ID":1,"NAME":"Javascript"}],
+        VALUE: [],
         REQUIRED: true,
         VALIDATION:'El campo es requerido'
       },
       {
-        ID:'tags',
+        ID:'tags_noticias',
         NAME:'Tags',
         TYPE:'select-multiple',
         CLASS:'',
@@ -78,20 +102,23 @@ var form =
         NAME:'Intro',
         TYPE:'note',
         CLASS:'wysiwyg',
-        VALUE: ''
+        VALUE: '',
+        EXCLUDE:true
       },
       {
         ID:'texto',
         NAME:'Texto',
         TYPE:'note',
         CLASS:'wysiwyg',
-        VALUE: ''
+        VALUE: '',
+        EXCLUDE:true
       },
       {
         ID: 'imagen',
         NAME: 'Subir imagen',
         TYPE: 'file',
-        CLASS: 'btn btn-info fileinput-button'
+        CLASS: 'btn btn-info fileinput-button',
+        EXCLUDE:true
       }
 
 
@@ -123,8 +150,8 @@ class AltaNoticia extends React.Component {
   }
   componentDidMount(){
     var obj = {
-      categorias: '',
-      tags: ''
+      categorias_noticias: '',
+      tags_noticias: ''
     }
     AppActions.getALL(this.state.select1, (res) => {
       var json = [];
@@ -134,7 +161,7 @@ class AltaNoticia extends React.Component {
         j.NAME = res[i].titulo;
         json.push(j)
       }
-      obj.categorias = json;
+      obj.categorias_noticias = json;
       AppActions.getALL(this.state.select2, (res) => {
         var json = []
         for(var i = 0; i < res.length; i++){
@@ -143,7 +170,7 @@ class AltaNoticia extends React.Component {
           j.NAME = res[i].titulo;
           json.push(j)
         }
-        obj.tags = json;
+        obj.tags_noticias = json;
 
         mapValues(obj, form)
         this.setState({data:true})
@@ -153,15 +180,22 @@ class AltaNoticia extends React.Component {
 
 
   }
-  makeAction(obj){
-    AppActions.add(this.state.api, obj, (res) => {
-      console.log('crear noticia',res)
+  makeUpload(id){
+    AppActions.uploadNoticia(id, (res) => {
+      console.log('subida la imagen',res)
       this.props.history.pushState(null, "/listar_noticias");
+    })
+  }
+  makeAction(obj){
+    AppActions.add(this.props.api, obj, (res) => {
+      console.log('crear noticia',res)
+      this.props.makeUpload.bind(this)(res.id)
     })
   }
 
   render() {
     if(this.state.data){
+      console.log('form',form)
     return (
       <div>
         <UISideBar data={config}/>
@@ -170,7 +204,7 @@ class AltaNoticia extends React.Component {
           <div className="main-content" autoscroll="true" bs-affix-target="" init-ripples="">
             <section className='forms-advanced'>
               <UIPageHeader info={info}/>
-              <Form {...this.props} form={form} makeAction={this.makeAction.bind(this)}/>
+              <Form {...this.state} {...this.props} form={form} makeAction={this.makeAction} makeUpload={this.makeUpload}/>
             </section>
           </div>
         </div>

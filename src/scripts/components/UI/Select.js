@@ -20,7 +20,7 @@ class UISelect extends React.Component {
 
     return (
       <div>
-        <select ref='select' className="select2-tags form-control"
+        <select id={this.props.data.ID}ref='select' className="select2-tags form-control"
                 required={this.props.data.REQUIRED}
                 data-error={this.props.data.VALIDATION}
                 multiple={this.props.multiple}>

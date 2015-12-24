@@ -28,6 +28,9 @@ class Form extends React.Component {
       var value = "";
 
       switch(type){
+        case 'select-multiple':
+          value = $("#"+key).select2('data');
+          break;
         case 'note':
           value = $("#"+key).code();
           break;
@@ -52,6 +55,7 @@ class Form extends React.Component {
       }
 
       obj[key] = value;
+      console.log(key + " "+ value)
     }
 
     this.props.makeAction.bind(this)(obj);

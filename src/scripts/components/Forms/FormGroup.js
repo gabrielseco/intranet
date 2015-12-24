@@ -5,6 +5,8 @@ import UISummerNote from '../UI/SummerNote';
 import UIFileUpload from '../UI/FileUpload'
 import UIImagen from '../UI/Imagen'
 import UISelect from '../UI/Select'
+import UIDatePicker from '../UI/DatePicker'
+
 
 class FormGroup extends React.Component {
   render(){
@@ -29,6 +31,10 @@ class FormGroup extends React.Component {
         break;
       case 'select':
         input = <UISelect data={this.props.data}/>
+        break;
+      case 'datepicker':
+        input = <UIDatePicker data={this.props.data}/>
+        break;
       default:
         input =  <UIInput data={this.props.data}/>
     }

@@ -61,4 +61,20 @@ export default {
       cb(id)
     }
   },
+  uploadNoticia(id, cb) {
+    var imagen = this.getPropertyFromStore('imagen');
+    if(imagen !== undefined){
+    var data = new FormData();
+        data.append('id', +id);
+        data.append('file', imagen);
+
+
+    axios.post('http://localhost:1337/noticias/uploadImagen/',data)
+         .then(function(response){
+           cb(response.data)
+         })
+    } else {
+      cb(id)
+    }
+  },
 }

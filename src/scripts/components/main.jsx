@@ -51,6 +51,7 @@ import Example from './Interfaces/Example'
 
 
 
+
 var history = createHistory({
   queryKey: false
 });
@@ -61,6 +62,7 @@ try {
   require('../styles/main.scss');
 
   render((
+
       <Router history={history}>
           <Route path="/" name="listar_usuarios" component={ListarUsuarios}/>
           <Route path="/listar_slide" name="listar_slide" component={ListarSlide}/>
