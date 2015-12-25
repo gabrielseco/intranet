@@ -1,12 +1,11 @@
 import React, { Component, PropTypes } from 'react'
-import moment from 'moment';
 import UISideBar from '../UI/SideBar';
 import UIPageHeader from '../UI/PageHeader';
 import MainContainer from '../Containers/MainContainer';
 import Form from '../Containers/Form';
 
 //using functions to map values
-import { mapValues, transformObjectForSelect } from '../../lib'
+import { mapValues, mapValuesSelect, transformObjectForSelect } from '../../lib'
 
 //flux
 import AppActions from '../../actions/app-actions';
@@ -14,13 +13,13 @@ import AppActions from '../../actions/app-actions';
 //config tiene el menú y la configuración del usuario
 import config from '../../config/config'
 
+var titulo = 'Noticia'
 
-var titulo = 'Noticia';
 
 var info = {
     TITULO : titulo,
     ICON: 'md-add-circle',
-    TEXTO: 'Desde este formulario puedes crear noticias'
+    TEXTO: 'Desde este formulario puedes modificar noticias'
 }
 
 var breadcrumb = [
@@ -32,13 +31,14 @@ var breadcrumb = [
     NAME: titulo
   },
   {
-    NAME: 'Alta de noticia'
+    NAME: 'Edición de noticia'
   }
 ]
 
+
 var form =
   {
-    TITULO:'Alta de noticia',
+    TITULO:'Modificar noticia',
     ELEMENTS:[
       {
         ID:'activo',
@@ -46,7 +46,7 @@ var form =
         TYPE:'switch',
         CLASS:'',
         VALUE:0,
-        EXCLUDE:true
+        EXCLUDE:false
 
       },
       {
@@ -54,8 +54,8 @@ var form =
         NAME:'Fecha',
         TYPE:'datepicker',
         CLASS:'',
-        VALUE:moment().format("YYYY-MM-DD"),
-        EXCLUDE:true
+        VALUE:'',
+        EXCLUDE:false
 
       },
       {
@@ -67,7 +67,7 @@ var form =
         VALUE: '',
         REQUIRED: true,
         VALIDATION:'El campo es requerido',
-        EXCLUDE:true
+        EXCLUDE:false
       },
       {
         ID:'slug',
@@ -77,7 +77,7 @@ var form =
         VALUE: '',
         REQUIRED: false,
         VALIDATION:'',
-        EXCLUDE:true
+        EXCLUDE:false
       },
       {
         ID:'categorias_noticias',
@@ -85,7 +85,8 @@ var form =
         TYPE:'select-multiple',
         CLASS:'',
         VALUE: [],
-        REQUIRED: true,
+        SELECTED:[],
+        REQUIRED: false,
         VALIDATION:'El campo es requerido'
       },
       {
@@ -94,7 +95,8 @@ var form =
         TYPE:'select-multiple',
         CLASS:'',
         VALUE: [],
-        REQUIRED: true,
+        SELECTED:[],
+        REQUIRED: false,
         VALIDATION:'El campo es requerido'
       },
       {
@@ -103,7 +105,7 @@ var form =
         TYPE:'note',
         CLASS:'wysiwyg',
         VALUE: '',
-        EXCLUDE:true
+        EXCLUDE:false
       },
       {
         ID:'texto',
@@ -111,17 +113,24 @@ var form =
         TYPE:'note',
         CLASS:'wysiwyg',
         VALUE: '',
-        EXCLUDE:true
+        EXCLUDE:false
+      },
+      {
+        ID:'imagenFD',
+        NAME:'Imagen',
+        TYPE:'img',
+        CLASS:'img-thumbnail',
+        FROM:'SERVER',
+        VALUE: '',
+        WIDTH:200
       },
       {
         ID: 'imagen',
         NAME: 'Subir imagen',
         TYPE: 'file',
         CLASS: 'btn btn-info fileinput-button',
-        EXCLUDE:true
+        EXCLUDE:false
       }
-
-
 
     ],
     BUTTONS: [
@@ -138,17 +147,15 @@ var form =
     ]
   }
 
-
-
-
-class AltaNoticia extends React.Component {
+class EditarNoticia extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {data: false, api: 'noticias', select1:'getAllCategoriesAndTags',}
-
+    this.state = { data: '', api: 'noticias', select1: 'getAllCategoriesAndTags' }
   }
+
   componentDidMount(){
+    var id = this.props.params.id;
     var obj = {
       categorias_noticias: '',
       tags_noticias: ''
@@ -160,30 +167,38 @@ class AltaNoticia extends React.Component {
       obj.categorias_noticias = transformObjectForSelect(keys, res.categorias);
       obj.tags_noticias = transformObjectForSelect(keys, res.tags);
 
-      mapValues(obj, form);
-      this.setState({data: true})
+      mapValuesSelect(obj, form);
 
+      AppActions.getOne(this.state.api, id, (res) => {
+
+        res.categorias_noticias = transformObjectForSelect(keys, res.categorias_noticias)
+        res.tags_noticias = transformObjectForSelect(keys, res.tags_noticias)
+
+        mapValues(res, form)
+        this.setState({data: res})
+      });
 
     });
 
-
   }
-  makeUpload(id){
-    AppActions.uploadNoticia(id, (res) => {
+  makeUpload(){
+    var id = this.props.params.id;
+    AppActions.uploadNoticia(+id, (res) => {
       console.log('subida la imagen',res)
       this.props.history.pushState(null, "/listar_noticias");
     })
   }
   makeAction(obj){
-    AppActions.add(this.props.api, obj, (res) => {
-      console.log('crear noticia',res)
-      this.props.makeUpload.bind(this)(res.id)
+    var id = this.props.params.id;
+    AppActions.update(this.props.api, id, obj, (res) => {
+      console.log('editado el la noticia',res)
+      this.props.makeUpload.bind(this)()
     })
   }
 
   render() {
-    if(this.state.data){
-      console.log('form',form)
+    if(this.state.data !== ''){
+
     return (
       <div>
         <UISideBar data={config}/>
@@ -199,7 +214,9 @@ class AltaNoticia extends React.Component {
         {this.props.children}
       </div>
     );
-  } else return(<div></div>)
+  } else {
+    return (<div></div>)
+  }
   }
 }
-export default AltaNoticia
+export default EditarNoticia

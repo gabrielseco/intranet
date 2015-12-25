@@ -25,6 +25,7 @@ import VerContacto from './Interfaces/VerContacto'
 /*NOTICIAS*/
 import AltaNoticia from './Interfaces/AltaNoticia';
 import ListarNoticias from './Interfaces/ListarNoticias'
+import EditarNoticia from './Interfaces/EditarNoticia'
 
 /* CATEGORÍAS NOTICIAS */
 import ListarCategoriasNoticias from './Interfaces/ListarCategoriasNoticias'
@@ -82,6 +83,8 @@ try {
 
           <Route path="/editar_usuario/:id" name="editar_usuario" component={EditarUsuario}/>
           <Route path="/editar_slide/:id" name="editar_slide" component={EditarSlide}/>
+          <Route path="/editar_noticia/:id" name="editar_noticia" component={EditarNoticia}/>
+
           <Route path="/editar_categoria_noticias/:id" name="editar_categoria_noticias" component={EditarCategoriaNoticia}/>
           <Route path="/editar_tag_noticias/:id" name="editar_tag_noticias" component={EditarTagNoticia}/>
 

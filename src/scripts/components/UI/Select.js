@@ -14,7 +14,17 @@ class UISelect extends React.Component {
   }
   render(){
     var options = this.props.data.VALUE.map((res, i) => {
+      try {
+      if(res.ID === this.props.data.SELECTED[i].ID){
+        return <option key={i} value={res.ID} selected>{res.NAME}</option>
+      } else {
+        return <option key={i} value={res.ID}>{res.NAME}</option>
+      }
+    } catch(err){
       return <option key={i} value={res.ID}>{res.NAME}</option>
+
+    }
+
     })
 
 
