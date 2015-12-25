@@ -82,6 +82,33 @@ var form =
         REQUIRED: false,
         VALIDATION:''
       },
+      {
+        ID:'twitter',
+        NAME:'Twitter',
+        TYPE:'text',
+        CLASS:'form-control',
+        VALUE: '',
+        REQUIRED: false,
+        VALIDATION:''
+      },
+      {
+        ID:'github',
+        NAME:'Github',
+        TYPE:'text',
+        CLASS:'form-control',
+        VALUE: '',
+        REQUIRED: false,
+        VALIDATION:''
+      },
+      {
+        ID:'soundcloud',
+        NAME:'Soundcloud',
+        TYPE:'text',
+        CLASS:'form-control',
+        VALUE: '',
+        REQUIRED: false,
+        VALIDATION:''
+      },
 
     ],
     BUTTONS: [
@@ -119,7 +146,7 @@ class EditarUsuario extends React.Component {
   makeAction(obj){
     var id = this.props.params.id;
     AppActions.update(this.state.api, id, obj, (res) => {
-      this.props.history.pushState(null, "/");
+      this.props.history.pushState(null, "/listar_usuarios");
     })
   }
 

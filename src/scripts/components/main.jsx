@@ -1,10 +1,16 @@
 import React from 'react';
 import { ReactDOM, ReactDOMServer, render} from 'react-dom';
-import { Router, Route} from 'react-router'
+import { Router, Route, NotFoundRoute} from 'react-router'
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 import createHistory from 'history/lib/createHashHistory';
 
 import App from './Interfaces/App.jsx';
+
+
+/* LOGIN */
+
+import Login from './Interfaces/Login'
+import NotFound from './Interfaces/NotFound'
 
 /*USUARIO*/
 
@@ -47,8 +53,6 @@ import ListarPortfolio from './Interfaces/ListarPortfolio'
 /*Configuración*/
 import Configuracion from './Interfaces/Configuracion'
 
-import Example from './Interfaces/Example'
-
 
 
 
@@ -65,7 +69,8 @@ try {
   render((
 
       <Router history={history}>
-          <Route path="/" name="listar_usuarios" component={ListarUsuarios}/>
+          <Route path="/" name="login" component={Login}/>
+          <Route path="/listar_usuarios" name="listar_usuarios" component={ListarUsuarios}/>
           <Route path="/listar_slide" name="listar_slide" component={ListarSlide}/>
           <Route path="/listar_contactos" name="listar_contactos" component={ListarContactos}/>
           <Route path="/listar_noticias" name="listar_noticias" component={ListarNoticias}/>
@@ -95,7 +100,8 @@ try {
 
           <Route path="/configuracion" name="configuracion" component={Configuracion}/>
 
-          <Route path="/example" name="example" component={Example}/>
+          <Route path="*" name='not-found' component={NotFound} />
+
 
 
       </Router>

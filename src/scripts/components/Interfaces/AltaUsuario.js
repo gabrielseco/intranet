@@ -80,6 +80,33 @@ var form =
         REQUIRED: false,
         VALIDATION:''
       },
+      {
+        ID:'twitter',
+        NAME:'Twitter',
+        TYPE:'text',
+        CLASS:'form-control',
+        VALUE: '',
+        REQUIRED: false,
+        VALIDATION:''
+      },
+      {
+        ID:'github',
+        NAME:'Github',
+        TYPE:'text',
+        CLASS:'form-control',
+        VALUE: '',
+        REQUIRED: false,
+        VALIDATION:''
+      },
+      {
+        ID:'soundcloud',
+        NAME:'Soundcloud',
+        TYPE:'text',
+        CLASS:'form-control',
+        VALUE: '',
+        REQUIRED: false,
+        VALIDATION:''
+      },
 
 
     ],
@@ -112,7 +139,7 @@ class AltaUsuario extends React.Component {
   makeAction(obj){
     AppActions.add(this.state.api, obj, (res) => {
       console.log('crear usuario',res)
-      this.props.history.pushState(null, "/");
+      this.props.history.pushState(null, "/listar_usuarios");
     })
   }
 
