@@ -69,7 +69,7 @@ try {
   render((
 
       <Router history={history}>
-          <Route path="/" name="login" component={Login}/>
+          <Route path="/intranet" name="login" component={Login}/>
           <Route path="/listar_usuarios" name="listar_usuarios" component={ListarUsuarios}/>
           <Route path="/listar_slide" name="listar_slide" component={ListarSlide}/>
           <Route path="/listar_contactos" name="listar_contactos" component={ListarContactos}/>

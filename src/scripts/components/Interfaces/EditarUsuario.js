@@ -48,8 +48,8 @@ var form =
 
       },
       {
-        ID:'usuario',
-        NAME:'Usuario',
+        ID:'email',
+        NAME:'Email',
         TYPE:'text',
         CLASS:'form-control',
         VALUE: '',
@@ -64,15 +64,7 @@ var form =
         VALUE: '',
         EXCLUDE: true
       },
-      {
-        ID:'email',
-        NAME:'Email',
-        TYPE:'text',
-        CLASS:'form-control',
-        VALUE: '',
-        REQUIRED: true,
-        VALIDATION:'El campo es requerido'
-      },
+
       {
         ID:'nombre',
         NAME:'Nombre',
@@ -132,12 +124,13 @@ class EditarUsuario extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { data: '', api: 'user' }
+    this.state = { data: '', api: 'auth' }
   }
 
   componentDidMount(){
     var id = this.props.params.id;
     AppActions.getOne(this.state.api, id, (res) => {
+
       mapValues(res, form);
       this.setState({data: res})
     });

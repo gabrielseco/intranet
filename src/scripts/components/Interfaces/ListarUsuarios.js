@@ -66,7 +66,7 @@ var tabla = {
       SORT: true
     },
     {
-      NAME:'Usuario',
+      NAME:'Nombre',
       SORT: true
     },
     {
@@ -94,7 +94,8 @@ function mapToTable(json, headers, modal){
 
 
   for(var i = 0; i < json.length; i++){
-    var fecha = moment(json[i]["alta"]).format("DD/MM/YYYY")
+
+    var fecha = moment(json[i]["createdAt"]).format("DD/MM/YYYY")
 
     var borrar = {
       CLASS:'btn btn-danger',
@@ -119,7 +120,7 @@ function mapToTable(json, headers, modal){
     var obj = {
       fecha: fecha,
       activo: json[i]["activo"] ? "Sí" : "No",
-      usuario: json[i]["usuario"],
+      usuario: json[i]["nombre"],
       editar: <UIButton data={editar}/>,
       eliminar: <UIButton data={borrar} />
     }
@@ -139,7 +140,7 @@ class ListarUsuarios extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {tabla: '', api:'user', modalLoading: false}
+    this.state = {tabla: '', api:'auth', modalLoading: false}
   }
   componentDidMount(){
     var headers = tabla.HEADERS;
@@ -154,7 +155,7 @@ class ListarUsuarios extends React.Component {
       modalLoading: true
     })
     var info = AppActions.getPropertyFromStore('idUser');
-    infoModal.NAME = info.usuario;
+    infoModal.NAME = info.nombre;
   }
   remove(){
     console.log('remove')

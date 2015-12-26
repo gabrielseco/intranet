@@ -44,8 +44,8 @@ var form =
         VALUE:0,
       },
       {
-        ID:'usuario',
-        NAME:'Usuario',
+        ID:'email',
+        NAME:'Email',
         TYPE:'text',
         CLASS:'form-control',
         VALUE: '',
@@ -60,16 +60,6 @@ var form =
         VALUE: '',
         REQUIRED: true,
        'VALIDATION':'El campo es requerido'
-
-      },
-      {
-        ID:'email',
-        NAME:'Email',
-        TYPE:'text',
-        CLASS:'form-control',
-        VALUE: '',
-        REQUIRED: true,
-        VALIDATION:'El campo es requerido'
       },
       {
         ID:'nombre',
@@ -133,7 +123,7 @@ class AltaUsuario extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {api: 'user'}
+    this.state = {api: 'auth'}
   }
 
   makeAction(obj){
