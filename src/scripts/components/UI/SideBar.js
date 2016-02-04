@@ -22,7 +22,7 @@ class UISideBar extends React.Component {
 
           <div>
             <aside className="sidebar fixed" style={style}>
-              <UIBrandLogo name={this.props.data.config.NAME}/>
+              <UIBrandLogo name={this.props.data.config.NAME} URL={this.props.data.config.LINK} />
               <UIUserInfo config={this.props.data.config} />
               <UIMenu menu={this.props.data.menu}/>
             </aside>

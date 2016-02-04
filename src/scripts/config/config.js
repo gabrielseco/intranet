@@ -1,5 +1,6 @@
 module.exports.config = {
   NAME: 'GGSECO.COM',
+  LINK: 'http://www.ggseco.com',
   PROFILE: {
     NAME: 'Gabriel',
     EMAIL: 'ggarciaseco@gmail.com',
