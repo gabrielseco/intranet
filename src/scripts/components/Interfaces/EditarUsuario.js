@@ -124,7 +124,7 @@ class EditarUsuario extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { data: '', api: 'auth' }
+    this.state = { data: '', api: 'user' }
   }
 
   componentDidMount(){

@@ -123,7 +123,7 @@ class AltaUsuario extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {api: 'auth'}
+    this.state = {api: 'user'}
   }
 
   makeAction(obj){

@@ -140,7 +140,7 @@ class ListarUsuarios extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {tabla: '', api:'auth', modalLoading: false}
+    this.state = {tabla: '', api:'user', modalLoading: false}
   }
   componentDidMount(){
     var headers = tabla.HEADERS;
