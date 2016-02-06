@@ -16,7 +16,7 @@ module.exports.menu = [
     CHILDREN:[
       {
         NAME: 'Listado de usuarios',
-        LINK: '/listar_usuarios',
+        LINK: '/#listar_usuarios',
         ID:'listar-usuarios',
         NOTIFICATION:''
       },

@@ -8,8 +8,8 @@ const UIUserInfo = ( { config } ) => (
       </div>
       <div className="user-email">{config.PROFILE.EMAIL}</div>
       <div className="user-actions">
-        <a className="m-r-5" href="#">configuración</a>
-        <a href="#">cerrar sessión</a>
+        <a className="m-r-5" href="#/configuracion">configuración</a>
+        <a href="#/">cerrar sessión</a>
       </div>
     </div>
   </div>

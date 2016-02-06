@@ -9,49 +9,49 @@ import App from './Interfaces/App.jsx';
 
 /* LOGIN */
 
-import Login from './Interfaces/Login'
-import NotFound from './Interfaces/NotFound'
+import Login from './Interfaces/Private/Login'
+import NotFound from './Interfaces/Private/NotFound'
 
 /*USUARIO*/
 
-import AltaUsuario from './Interfaces/AltaUsuario';
-import EditarUsuario from './Interfaces/EditarUsuario'
-import ListarUsuarios from './Interfaces/ListarUsuarios'
+import AltaUsuario from './Interfaces/Private/Usuarios/AltaUsuario';
+import EditarUsuario from './Interfaces/Private/Usuarios/EditarUsuario'
+import ListarUsuarios from './Interfaces/Private/Usuarios/ListarUsuarios'
 
 /* SLIDE */
-import AltaSlide from './Interfaces/AltaSlide';
-import EditarSlide from './Interfaces/EditarSlide'
-import ListarSlide from './Interfaces/ListarSlide'
+import AltaSlide from './Interfaces/Private/Slide/AltaSlide';
+import EditarSlide from './Interfaces/Private/Slide/EditarSlide'
+import ListarSlide from './Interfaces/Private/Slide/ListarSlide'
 
 
 /* CONTACTO */
-import ListarContactos from './Interfaces/ListarContactos'
-import VerContacto from './Interfaces/VerContacto'
+import ListarContactos from './Interfaces/Private/Contacto/ListarContactos'
+import VerContacto from './Interfaces/Private/Contacto/VerContacto'
 
 /*NOTICIAS*/
-import AltaNoticia from './Interfaces/AltaNoticia';
-import ListarNoticias from './Interfaces/ListarNoticias'
-import EditarNoticia from './Interfaces/EditarNoticia'
+import AltaNoticia from './Interfaces/Private/Noticias/AltaNoticia';
+import ListarNoticias from './Interfaces/Private/Noticias/ListarNoticias'
+import EditarNoticia from './Interfaces/Private/Noticias/EditarNoticia'
 
 /* CATEGORÍAS NOTICIAS */
-import ListarCategoriasNoticias from './Interfaces/ListarCategoriasNoticias'
-import AltaCategoriaNoticia from './Interfaces/AltaCategoriaNoticia'
-import EditarCategoriaNoticia from './Interfaces/EditarCategoriaNoticia'
+import ListarCategoriasNoticias from './Interfaces/Private/Noticias/ListarCategoriasNoticias'
+import AltaCategoriaNoticia from './Interfaces/Private/Noticias/AltaCategoriaNoticia'
+import EditarCategoriaNoticia from './Interfaces/Private/Noticias/EditarCategoriaNoticia'
 
 /* TAGS NOTICIAS */
 
-import ListarTagsNoticias from './Interfaces/ListarTagsNoticias'
-import AltaTagNoticia from './Interfaces/AltaTagNoticia'
-import EditarTagNoticia from './Interfaces/EditarTagNoticia'
+import ListarTagsNoticias from './Interfaces/Private/Noticias/ListarTagsNoticias'
+import AltaTagNoticia from './Interfaces/Private/Noticias/AltaTagNoticia'
+import EditarTagNoticia from './Interfaces/Private/Noticias/EditarTagNoticia'
 
 
 /*PORTFOLIO*/
-import AltaPortfolio from './Interfaces/AltaPortfolio';
-import ListarPortfolio from './Interfaces/ListarPortfolio'
+import AltaPortfolio from './Interfaces/Private/Portfolio/AltaPortfolio';
+import ListarPortfolio from './Interfaces/Private/Portfolio/ListarPortfolio'
 
 
 /*Configuración*/
-import Configuracion from './Interfaces/Configuracion'
+import Configuracion from './Interfaces/Private/Configuracion/Configuracion'
 
 
 
@@ -65,6 +65,7 @@ var history = createHistory({
 try {
 
   require('../styles/main.scss');
+  //require('../styles/public/screen.scss'); 
 
   render((
 

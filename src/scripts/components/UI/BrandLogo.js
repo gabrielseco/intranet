@@ -1,5 +1,8 @@
 import React, { Component, PropTypes } from 'react'
-import { Link } from 'react-router';
+
+var link = {
+  color: '#fff'
+}
 
 const UIBrandLogo = ( { name , URL, openLink } ) => {
   openLink = openLink === true ? "_blank" : null
@@ -10,7 +13,7 @@ const UIBrandLogo = ( { name , URL, openLink } ) => {
       <div className="foot2"></div>
       <div className="foot3"></div>
       <div className="foot4"></div>
-    </div> <a href={URL} target={openLink}>{name}</a>
+    </div> <a href={URL} target={openLink} style={link}>{name}</a>
   </div>
 )
 }

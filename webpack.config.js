@@ -7,7 +7,8 @@
 'use strict';
 var webpack = require('webpack');
 
-module.exports = {
+module.exports = [
+  {
   context:__dirname,
   output: {
     filename: 'main.js',
@@ -63,4 +64,31 @@ module.exports = {
     new webpack.NoErrorsPlugin()
   ]
 
-};
+},
+{
+  output: {
+    filename: 'main-public.scss',
+    publicPath: 'src/assets/',
+    path:'/src/assets'
+  },
+  name: 'css',
+  entry: {
+    styles: [
+     './src/scripts/styles/public/screen.scss'
+    ]
+  },
+  module: {
+    loaders: [
+    {
+      test: /\.scss/,
+      loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
+    },
+    {
+      test: /\.(png|jpg)$/,
+      loader: 'url-loader?limit=8192'
+    },
+
+  ]
+  },
+}
+]

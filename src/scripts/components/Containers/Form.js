@@ -41,13 +41,16 @@ class Form extends React.Component {
         default:
           try {
             value = document.getElementById(key).value;
+
           }
           catch(err) {
             value = this.props.form.ELEMENTS[i].VALUE;
           }
 
       }
-
+      if(value === ""){
+        value = null;
+      }
       if(value === 'true' && type === 'switch'){
         value = 1
       } else if(value === 'false' && type === 'switch'){
