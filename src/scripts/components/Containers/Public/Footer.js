@@ -1,0 +1,17 @@
+import React, { Component, PropTypes } from 'react'
+
+class Footer extends React.Component {
+  constructor(props){
+    super(props);
+  }
+
+  render(){
+    return(
+      <div className='main'>
+
+      </div>
+  )
+ }
+}
+
+export default Footer

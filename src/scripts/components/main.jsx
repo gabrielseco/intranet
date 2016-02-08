@@ -54,6 +54,9 @@ import ListarPortfolio from './Interfaces/Private/Portfolio/ListarPortfolio'
 import Configuracion from './Interfaces/Private/Configuracion/Configuracion'
 
 
+//public
+//Index
+import Index from './Interfaces/Public/Index'
 
 
 
@@ -65,11 +68,14 @@ var history = createHistory({
 try {
 
   require('../styles/main.scss');
-  //require('../styles/public/screen.scss'); 
+  //require('../styles/public/screen.scss');
 
   render((
 
       <Router history={history}>
+          <Route path="/" name="index" component={Index}/>
+
+
           <Route path="/intranet" name="login" component={Login}/>
           <Route path="/listar_usuarios" name="listar_usuarios" component={ListarUsuarios}/>
           <Route path="/listar_slide" name="listar_slide" component={ListarSlide}/>
@@ -97,9 +103,9 @@ try {
 
           <Route path="/ver_contacto/:id" name="ver_contacto" component={VerContacto}/>
 
-
-
           <Route path="/configuracion" name="configuracion" component={Configuracion}/>
+
+
 
           <Route path="*" name='not-found' component={NotFound} />
 
