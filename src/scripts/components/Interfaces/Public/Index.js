@@ -6,7 +6,6 @@
   import Drawer from '../../Containers/Public/Drawer';
   import Main from '../../Containers/Public/Main';
 
-  require('../../../styles/public/screen.scss');
 
   class Index extends React.Component {
     constructor(props){

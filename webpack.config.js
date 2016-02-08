@@ -20,6 +20,7 @@ module.exports = [
   debug: true,
   devtool: false,
   entry: [
+      'webpack-dev-server/client?http://localhost:5000', // WebpackDevServer host and port
       'webpack/hot/only-dev-server',
       './src/scripts/components/main.jsx'
   ],
@@ -41,7 +42,13 @@ module.exports = [
       {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel',
+        loader: ['react-hot'],
+        query:{}
+      },
+      {
+        test: /\.jsx?$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: ['babel'],
         query: {
           presets: ['es2015','react'],
           cacheDirectory: true

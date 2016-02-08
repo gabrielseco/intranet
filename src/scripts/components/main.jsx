@@ -1,6 +1,6 @@
 import React from 'react';
 import { ReactDOM, ReactDOMServer, render} from 'react-dom';
-import { Router, Route, NotFoundRoute} from 'react-router'
+import { Router, Route, NotFoundRoute, IndexRoute} from 'react-router'
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 import createHistory from 'history/lib/createHashHistory';
 
@@ -67,14 +67,14 @@ var history = createHistory({
 
 try {
 
-  require('../styles/main.scss');
-  //require('../styles/public/screen.scss');
+  require('../styles/main.scss'); 
 
   render((
 
       <Router history={history}>
-          <Route path="/" name="index" component={Index}/>
-
+          <Route path="/" >
+            <IndexRoute  name="index" component={Index}/>
+          </Route>
 
           <Route path="/intranet" name="login" component={Login}/>
           <Route path="/listar_usuarios" name="listar_usuarios" component={ListarUsuarios}/>
