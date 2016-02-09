@@ -67,7 +67,7 @@ var history = createHistory({
 
 try {
 
-  require('../styles/main.scss'); 
+  require('../styles/main.scss');
 
   render((
 

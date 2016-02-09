@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { loadStyle, removeStyles} from '../../../lib/resources'
 
 //flux
 import AppActions from '../../../actions/app-actions';
@@ -8,10 +9,19 @@ var style = {
   maxWidth: '400px'
 }
 
+
 class Login extends React.Component {
   constructor(props){
     super(props);
     this.state = { api: 'user'}
+  }
+  componentDidMount(){
+    removeStyles();
+    loadStyle("src/assets/css/vendors.min.css")
+    loadStyle("src/assets/css/styles.min.css")
+    loadStyle("src/assets/css/intranet.css")
+
+
   }
   handleSubmit(e){
     e.preventDefault();

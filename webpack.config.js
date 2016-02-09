@@ -6,6 +6,8 @@
  */
 'use strict';
 var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 
 module.exports = [
   {
@@ -97,5 +99,9 @@ module.exports = [
 
   ]
   },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ]
 }
 ]
