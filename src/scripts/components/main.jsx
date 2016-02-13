@@ -57,6 +57,7 @@ import Configuracion from './Interfaces/Private/Configuracion/Configuracion'
 //public
 //Index
 import Index from './Interfaces/Public/Index'
+import Contacto from './Interfaces/Public/Contacto'
 
 
 
@@ -74,6 +75,9 @@ try {
       <Router history={history}>
           <Route path="/" >
             <IndexRoute  name="index" component={Index}/>
+          </Route>
+          <Route path="/contacto" >
+            <IndexRoute  name="contacto" component={Contacto}/>
           </Route>
 
           <Route path="/intranet" name="login" component={Login}/>

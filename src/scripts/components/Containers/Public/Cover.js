@@ -10,7 +10,7 @@ import MouseCoverScroll from '../../UI/Public/Cover/MouseCoverScroll'
 var list_items = [
   {
     TITLE: 'Contacto',
-    URL: '/contacto'
+    URL: '/#contacto'
   }
 ]
 

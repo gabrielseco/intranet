@@ -5,6 +5,9 @@
   import SearchForm from '../../Containers/Public/SearchForm';
   import Drawer from '../../Containers/Public/Drawer';
   import Main from '../../Containers/Public/Main';
+  import Cover from '../../Containers/Public/Cover';
+  import PostList from '../../Containers/Public/PostList';
+  import Footer from '../../Containers/Public/Footer'
 
 
 
@@ -28,7 +31,11 @@
           <HeaderPinned/>
           <SearchForm/>
           <Drawer/>
-          <Main/>
+          <Main>
+            <Cover/>
+            <PostList/>
+            <Footer/>
+          </Main>
         </Home>
     )
    }

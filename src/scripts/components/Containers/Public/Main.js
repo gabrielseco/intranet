@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import Cover from './Cover';
-import PostList from './PostList';
-import Footer from './Footer'
+
 
 class Main extends React.Component {
   constructor(props){
@@ -11,9 +9,7 @@ class Main extends React.Component {
   render(){
     return(
       <div className='pagewrapper'>
-          <Cover/>
-          <PostList/>
-          <Footer/>
+          {this.props.children}
       </div>
   )
  }

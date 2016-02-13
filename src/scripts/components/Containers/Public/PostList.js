@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import PostItem from '../../UI/Public/PostList/PostItem'
 
 class PostList extends React.Component {
   constructor(props){
@@ -8,7 +9,7 @@ class PostList extends React.Component {
   render(){
     return(
       <div className='postlist'>
-
+        <PostItem/>
       </div>
   )
  }
