@@ -29,7 +29,7 @@ class Footer extends React.Component {
             </a>
           </li>
       		<li>
-              <a href="http://es.linkedin.com/in/gabrielgarciaseco" target="_blank"
+              <a href="https://es.linkedin.com/in/gabrielgarciaseco" target="_blank"
                   className="socialbutton linkedin">
                   <i className="fa fa-linkedin"></i>
               </a>

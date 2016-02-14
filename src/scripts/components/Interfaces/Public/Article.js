@@ -6,12 +6,11 @@ import SearchForm from '../../Containers/Public/SearchForm';
 import Drawer from '../../Containers/Public/Drawer';
 import Main from '../../Containers/Public/Main';
 import Cover from '../../Containers/Public/Cover';
-import FormContacto from '../../Containers/Public/FormContacto';
 import Footer from '../../Containers/Public/Footer'
 
 
 
-class Contacto extends React.Component {
+class Article extends React.Component {
   constructor(props){
     super(props);
   }
@@ -33,7 +32,7 @@ class Contacto extends React.Component {
         <Drawer/>
         <Main>
           <Cover/>
-          <FormContacto/>
+          <ArticleSection/>
           <Footer/>
         </Main>
       </Home>
@@ -41,4 +40,4 @@ class Contacto extends React.Component {
  }
 }
 
-export default Contacto
+export default Article

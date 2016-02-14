@@ -58,6 +58,7 @@ import Configuracion from './Interfaces/Private/Configuracion/Configuracion'
 //Index
 import Index from './Interfaces/Public/Index'
 import Contacto from './Interfaces/Public/Contacto'
+import Article from './Interfaces/Public/Article'
 
 
 
@@ -73,11 +74,14 @@ try {
   render((
 
       <Router history={history}>
-          <Route path="/" >
+          <Route path="/">
             <IndexRoute  name="index" component={Index}/>
           </Route>
-          <Route path="/contacto" >
+          <Route path="/contacto">
             <IndexRoute  name="contacto" component={Contacto}/>
+          </Route>
+          <Route path="/article">
+            <IndexRoute  name="artile" component={Article}/>
           </Route>
 
           <Route path="/intranet" name="login" component={Login}/>

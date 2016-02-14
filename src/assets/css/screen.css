@@ -2990,7 +2990,8 @@ nav.pagination {
 footer.main {
   overflow: hidden;
   padding: 30px;
-  background: #242526; }
+  background: #242526;
+  clear: both;}
   footer.main .copyright {
     float: left;
     padding: 0;
