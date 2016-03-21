@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 
-const DrawerIconCover = () => {
+const DrawerIconCover = ({display}) => {
+  if(!display)
+    return (<div></div>)
   return(
     <li className="option drawernav">
       <span className="showdrawer">
@@ -11,6 +13,7 @@ const DrawerIconCover = () => {
 }
 
 DrawerIconCover.PropTypes = {
+  display: PropTypes.bool.isRequired
 
 }
 

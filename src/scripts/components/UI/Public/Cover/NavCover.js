@@ -21,8 +21,8 @@ class NavCover extends React.Component {
               </ul>
             </div>
             <ul>
-      				<SearchIconCover/>
-      				<DrawerIconCover/>
+      				<SearchIconCover display/>
+      				<DrawerIconCover display={false}/>
       			</ul>
       		</nav>
   )

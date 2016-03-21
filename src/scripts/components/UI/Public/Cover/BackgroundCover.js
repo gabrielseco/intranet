@@ -8,7 +8,7 @@ const BackgroundCover = ( { URL } ) => {
 
   return(
     <div>
-      <div className="background"
+      <div id='background--image' className="background"
             style={style}>
       </div>
     </div>

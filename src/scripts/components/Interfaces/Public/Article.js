@@ -33,6 +33,9 @@ class Article extends React.Component {
         <Main>
           <Cover/>
           <ArticleSection/>
+          <CategoriesSection/>
+          <AuthorSection/>
+          <CommentsSection/>
           <Footer/>
         </Main>
       </Home>
