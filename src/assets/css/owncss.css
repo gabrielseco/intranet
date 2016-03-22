@@ -9,3 +9,10 @@
 .display--hidden{
   display: hidden;
 }
+
+.sharebuttons li a i {
+  margin-top: 10px;
+}
+.authorsocial li a i {
+  margin-top: 5px;
+}

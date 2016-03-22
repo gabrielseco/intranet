@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { loadStyle, removeStyles} from '../../../lib/resources'
 
 var style = {
   margin: 'auto',
@@ -8,6 +9,13 @@ var style = {
 class NotFound extends React.Component {
   goBack(){
     this.props.history.goBack()
+  }
+  componentDidMount(){
+    removeStyles();
+    loadStyle("src/assets/css/vendors.min.css")
+    loadStyle("src/assets/css/styles.min.css")
+    loadStyle("src/assets/css/intranet.css")
+
   }
   render(){
     return(

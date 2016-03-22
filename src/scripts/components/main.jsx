@@ -80,8 +80,7 @@ try {
           <Route path="/contacto">
             <IndexRoute  name="contacto" component={Contacto}/>
           </Route>
-          <Route path="/article">
-            <IndexRoute  name="artile" component={Article}/>
+          <Route path="/article/:name" component={Article}>
           </Route>
 
           <Route path="/intranet" name="login" component={Login}/>

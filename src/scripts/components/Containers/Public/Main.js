@@ -8,7 +8,7 @@ class Main extends React.Component {
 
   render(){
     return(
-      <div className='pagewrapper'>
+      <div className='single pagewrapper'>
           {this.props.children}
       </div>
   )

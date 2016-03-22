@@ -442,7 +442,8 @@ body.admin-bar .drawer {
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transform: translate(0, 0); }
+  transform: translate(0, 0);
+}
 
 /* makes the font 33% larger relative to the icon container */
 .fa-lg {
@@ -2649,7 +2650,7 @@ nav.light ul li ul {
 body.author .cover, body.category .cover, body.search .cover, body.archive .cover, body.home.paged .cover {
   height: 65vh; }
 
-body.single .cover .background {
+.single .cover .background {
   -webkit-animation: fadeinpost 0.5s ease-in-out;
   -moz-animation: fadeinpost 0.5s ease-in-out;
   animation: fadeinpost 0.5s ease-in-out; }
@@ -4159,11 +4160,11 @@ nav.social .socialdark, .socialdark {
     background: #f1f1f1; }
 
 @media (max-width: 880px) {
-  body.single .posttitle, body.page .posttitle {
+  .single .posttitle, body.page .posttitle {
     text-align: center; }
-    body.single .posttitle h1, body.single .posttitle .excerpt, body.page .posttitle h1, body.page .posttitle .excerpt {
+    single .posttitle h1, .single .posttitle .excerpt, body.page .posttitle h1, body.page .posttitle .excerpt {
       text-align: center; }
-    body.single .posttitle .meta .category, body.page .posttitle .meta .category {
+    .single .posttitle .meta .category, body.page .posttitle .meta .category {
       margin: 0 auto; } }
 
 .cover.front .posttitle .meta .date, .cover.front .posttitle .meta .readtime {
@@ -5162,63 +5163,63 @@ img.mfp-img {
           display: inline-block; } }
 
 /* POST AUTHOR */
-body.single .pagewrapper .widget.authorprofile, body.page .pagewrapper .widget.authorprofile, .authortitle {
+.single .pagewrapper .widget.authorprofile, .pagewrapper .widget.authorprofile, .authortitle {
   margin: 110px 0 0;
   background: #f9f9f9;
   border-top: 1px solid #f3f3f3;
   text-align: center; }
-  body.single .pagewrapper .widget.authorprofile .info, body.page .pagewrapper .widget.authorprofile .info, .authortitle .info {
+  .single .pagewrapper .widget.authorprofile .info, .pagewrapper .widget.authorprofile .info, .authortitle .info {
     margin: -73px 0 30px; }
-  body.single .pagewrapper .widget.authorprofile .gravatar img, body.page .pagewrapper .widget.authorprofile .gravatar img, .authortitle .gravatar img {
+  .single .pagewrapper .widget.authorprofile .gravatar img,.pagewrapper .widget.authorprofile .gravatar img, .authortitle .gravatar img {
     border-radius: 90px;
     overflow: hidden; }
-  body.single .pagewrapper .widget.authorprofile .meta .title, body.single .pagewrapper .widget.authorprofile .meta .twittertag, body.page .pagewrapper .widget.authorprofile .meta .title, body.page .pagewrapper .widget.authorprofile .meta .twittertag, .authortitle .meta .title, .authortitle .meta .twittertag {
+  .single .pagewrapper .widget.authorprofile .meta .title, .single .pagewrapper .widget.authorprofile .meta .twittertag, .pagewrapper .widget.authorprofile .meta .title, body.page .pagewrapper .widget.authorprofile .meta .twittertag, .authortitle .meta .title, .authortitle .meta .twittertag {
     font-family: "Montserrat", "Arial", Sans-Serif;
     font-weight: 400;
     font-size: 15px;
     line-height: normal;
     text-transform: uppercase;
     color: #c9c9c9; }
-  body.single .pagewrapper .widget.authorprofile .meta .title, body.page .pagewrapper .widget.authorprofile .meta .title, .authortitle .meta .title {
+  .single .pagewrapper .widget.authorprofile .meta .title, .pagewrapper .widget.authorprofile .meta .title, .authortitle .meta .title {
     display: block;
     margin-top: 26px; }
-  body.single .pagewrapper .widget.authorprofile .meta .twittertag, body.page .pagewrapper .widget.authorprofile .meta .twittertag, .authortitle .meta .twittertag {
+  .single .pagewrapper .widget.authorprofile .meta .twittertag, .pagewrapper .widget.authorprofile .meta .twittertag, .authortitle .meta .twittertag {
     color: #c9c9c9;
     font-size: 14px;
     text-transform: none; }
-    body.single .pagewrapper .widget.authorprofile .meta .twittertag:hover, body.page .pagewrapper .widget.authorprofile .meta .twittertag:hover, .authortitle .meta .twittertag:hover {
+    .single .pagewrapper .widget.authorprofile .meta .twittertag:hover, .pagewrapper .widget.authorprofile .meta .twittertag:hover, .authortitle .meta .twittertag:hover {
       color: #959595; }
-  body.single .pagewrapper .widget.authorprofile .meta h3, body.page .pagewrapper .widget.authorprofile .meta h3, .authortitle .meta h3 {
+  .single .pagewrapper .widget.authorprofile .meta h3, .pagewrapper .widget.authorprofile .meta h3, .authortitle .meta h3 {
     margin: 5px 0 6px; }
-  body.single .pagewrapper .widget.authorprofile .meta h3 a, body.page .pagewrapper .widget.authorprofile .meta h3 a, .authortitle .meta h3 a {
+  .single .pagewrapper .widget.authorprofile .meta h3 a, .pagewrapper .widget.authorprofile .meta h3 a, .authortitle .meta h3 a {
     font-family: "Varela Round", "Arial", Sans-Serif;
     font-weight: 600;
     font-size: 24px;
     line-height: normal;
     color: #403f3f; }
-  body.single .pagewrapper .widget.authorprofile p, body.page .pagewrapper .widget.authorprofile p, .authortitle p {
+  .single .pagewrapper .widget.authorprofile p, .pagewrapper .widget.authorprofile p, .authortitle p {
     font-family: "Oxygen", "Arial", Sans-Serif;
     font-weight: 400;
     font-size: 17px;
     line-height: 32px;
     margin: 20px 0 45px;
     color: #62646c; }
-  body.single .pagewrapper .widget.authorprofile .authorsocial, body.page .pagewrapper .widget.authorprofile .authorsocial, .authortitle .authorsocial {
+  .single .pagewrapper .widget.authorprofile .authorsocial, .pagewrapper .widget.authorprofile .authorsocial, .authortitle .authorsocial {
     overflow: hidden;
     display: inline-block;
     margin-bottom: 40px;
     text-align: center;
     padding: 0; }
-    body.single .pagewrapper .widget.authorprofile .authorsocial li, body.page .pagewrapper .widget.authorprofile .authorsocial li, .authortitle .authorsocial li {
+    .single .pagewrapper .widget.authorprofile .authorsocial li, .pagewrapper .widget.authorprofile .authorsocial li, .authortitle .authorsocial li {
       display: inline-block;
       margin-right: 8px;
       margin-bottom: 10px; }
-      body.single .pagewrapper .widget.authorprofile .authorsocial li:last-child, body.page .pagewrapper .widget.authorprofile .authorsocial li:last-child, .authortitle .authorsocial li:last-child {
+      .single .pagewrapper .widget.authorprofile .authorsocial li:last-child, .pagewrapper .widget.authorprofile .authorsocial li:last-child, .authortitle .authorsocial li:last-child {
         margin-right: 0; }
-      body.single .pagewrapper .widget.authorprofile .authorsocial li a, body.page .pagewrapper .widget.authorprofile .authorsocial li a, .authortitle .authorsocial li a {
+      .single .pagewrapper .widget.authorprofile .authorsocial li a, .pagewrapper .widget.authorprofile .authorsocial li a, .authortitle .authorsocial li a {
         font-size: 12px;
         line-height: 26px; }
-      body.single .pagewrapper .widget.authorprofile .authorsocial li a:hover, body.page .pagewrapper .widget.authorprofile .authorsocial li a:hover, .authortitle .authorsocial li a:hover {
+      .single .pagewrapper .widget.authorprofile .authorsocial li a:hover, .pagewrapper .widget.authorprofile .authorsocial li a:hover, .authortitle .authorsocial li a:hover {
         color: #fff; }
 
 /* COMMENTS */
@@ -5475,10 +5476,10 @@ li.comment.depth-2 hr, li.comment.depth-3 hr, li.comment.depth-4 hr, li.comment.
 li.comment.depth-2 .main, li.comment.depth-3 .main, li.comment.depth-4 .main, li.comment.depth-5 .main, li.comment.depth-6 .main, li.comment.depth-7 .main, li.comment.depth-8 .main, li.comment.depth-9 .main, li.comment.depth-10 .main {
   width: 95%; }
 
-body.single .pagewrapper {
+.single .pagewrapper {
   padding-bottom: 75px; }
   @media (max-width: 750px) {
-    body.single .pagewrapper {
+    .single .pagewrapper {
       padding-bottom: 0px; } }
 
 .disquscomments {
